@@ -1,138 +1,153 @@
 <template>
-  <!-- Esta sección es la encargada de controlar la vista -->
+  <!-- Esta sección es la encargada de controlar los datos que se pasan al resto de los elementos -->
   <div class="nav-bar" id="nav-bar">
-    <div class="contenedor-botones-vista">
-      <button
-        class="boton-vista"
-        :style="`${
-          vista_mostrada == 'descripccion_inicio'
-            ? 'background-color: #72CDE9'
-            : 'background-color: #f4f5f6'
-        }`"
-        type="button"
-        @click="setVista('descripccion_inicio')"
-      >
-        Inicio
-      </button>
-      <button
-        class="boton-vista"
-        :style="`${
-          vista_mostrada == 'herramienta_filtros'
-            ? 'background-color: #72CDE9'
-            : 'background-color: #f4f5f6'
-        }`"
-        type="button"
-        @click="setVista('herramienta_filtros')"
-      >
-        Filtros
-      </button>
-      <button
-        class="boton-vista"
-        :style="`${
-          vista_mostrada == 'buscador_judicial'
-            ? 'background-color: #72CDE9'
-            : 'background-color: #f4f5f6'
-        }`"
-        type="button"
-        @click="setVista('buscador_judicial')"
-      >
-        Buscador
-      </button>
-      <button
-        class="boton-vista"
-        :style="`${
-          vista_mostrada == 'ver_todo'
-            ? 'background-color: #72CDE9'
-            : 'background-color: #f4f5f6'
-        }`"
-        type="button"
-        @click="setVista('ver_todo')"
-      >
-        Ver todo
-      </button>
-    </div>
-  </div>
-
-  <div class="main-content">
-    <!-- Esta sección es la encargada de controlar los datos que se pasan al resto de los elementos -->
-    <div
-      class="side-bar"
-      id="side-bar"
-      @mouseover="abrirSidebar"
-      @mouseout="cerrarSidebar"
-    >
-      <div class="contenedor-botones-organo">
+    <div class="contenedor-botones-organo">
+      <div class="div-boton-organo">
         <button
           class="boton-oragno"
           :style="`${
-            organo == 'suprema_corte'
-              ? 'background-color: #72CDE9'
-              : 'background-color: #f4f5f6'
+            organo == 'suprema_corte' ? 'opacity: 1' : 'opacity: 0.5'
           }`"
           type="button"
           @click="setData('suprema_corte')"
         >
           Suprema Corte de Justicia
         </button>
+      </div>
+
+      <div class="div-boton-organo">
         <button
           class="boton-oragno"
           :style="`${
-            organo == 'sala_superior'
-              ? 'background-color: #72CDE9'
-              : 'background-color: #f4f5f6'
+            organo == 'sala_superior' ? 'opacity: 1' : 'opacity: 0.5'
           }`"
           type="button"
           @click="setData('sala_superior')"
         >
           Sala Superior
         </button>
+      </div>
+
+      <div class="div-boton-organo">
         <button
           class="boton-oragno"
           :style="`${
-            organo == 'sala_regional'
-              ? 'background-color: #72CDE9'
-              : 'background-color: #f4f5f6'
+            organo == 'sala_regional' ? 'opacity: 1' : 'opacity: 0.5'
           }`"
           type="button"
           @click="setData('sala_regional')"
         >
           Sala Regional
         </button>
+      </div>
+
+      <div class="div-boton-organo">
         <button
           class="boton-oragno"
           :style="`${
-            organo == 'tribunal_disciplinario'
-              ? 'background-color: #72CDE9'
-              : 'background-color: #f4f5f6'
+            organo == 'tribunal_disciplinario' ? 'opacity: 1' : 'opacity: 0.5'
           }`"
           type="button"
           @click="setData('tribunal_disciplinario')"
         >
           Tribunal Disciplinario
         </button>
+      </div>
+
+      <div class="div-boton-organo">
         <button
           class="boton-oragno"
           :style="`${
-            organo == 'magistraturas_circuito'
-              ? 'background-color: #72CDE9'
-              : 'background-color: #f4f5f6'
+            organo == 'magistraturas_circuito' ? 'opacity: 1' : 'opacity: 0.5'
           }`"
           type="button"
           @click="setData('magistraturas_circuito')"
         >
           Magistratura de Circuito
         </button>
+      </div>
+
+      <div class="div-boton-organo">
         <button
           class="boton-oragno"
           :style="`${
-            organo == 'juzgadores_distrito'
-              ? 'background-color: #72CDE9'
-              : 'background-color: #f4f5f6'
+            organo == 'juzgadores_distrito' ? 'opacity: 1' : 'opacity: 0.5'
           }`"
           type="button"
           @click="setData('juzgadores_distrito')"
         >
           Juzgadores de distrito
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <!-- Esta sección es la encargada de controlar la vista -->
+    <div
+      class="side-bar"
+      id="side-bar"
+      @mouseover="toggleSidebar"
+      @mouseout="toggleSidebar"
+    >
+      <div class="contenedor-botones-vista">
+        <button
+          class="boton-vista"
+          :style="`${
+            vista_mostrada == 'descripccion_inicio'
+              ? 'opacity: 1'
+              : 'opacity: 0.5'
+          }`"
+          type="button"
+          @click="setVista('descripccion_inicio')"
+        >
+          <img src="../src/assets/img/home_icon.png" height="16" width="16" />
+          <span :style="`${mini_sidebar ? 'display: block' : 'display: none'}`">
+            Inicio
+          </span>
+        </button>
+        <button
+          class="boton-vista"
+          :style="`${
+            vista_mostrada == 'herramienta_filtros'
+              ? 'opacity: 1'
+              : 'opacity: 0.5'
+          }`"
+          type="button"
+          @click="setVista('herramienta_filtros')"
+        >
+          <img src="../src/assets/img/filter_icon.png" height="16" width="16" />
+          <span :style="`${mini_sidebar ? 'display: block' : 'display: none'}`">
+            Filtrar
+          </span>
+        </button>
+        <button
+          class="boton-vista"
+          :style="`${
+            vista_mostrada == 'buscador_judicial'
+              ? 'opacity: 1'
+              : 'opacity: 0.5'
+          }`"
+          type="button"
+          @click="setVista('buscador_judicial')"
+        >
+          <img src="../src/assets/img/search_icon.png" height="16" width="16" />
+          <span :style="`${mini_sidebar ? 'display: block' : 'display: none'}`">
+            Buscar
+          </span>
+        </button>
+        <button
+          class="boton-vista"
+          :style="`${
+            vista_mostrada == 'ver_todo' ? 'opacity: 1' : 'opacity: 0.5'
+          }`"
+          type="button"
+          @click="setVista('ver_todo')"
+        >
+          <img src="../src/assets/img/all_icon.png" height="16" width="16" />
+          <span :style="`${mini_sidebar ? 'display: block' : 'display: none'}`">
+            Ver todo
+          </span>
         </button>
       </div>
     </div>
@@ -167,6 +182,7 @@ const organo = ref(organoStore.organo_seleccionado);
 
 // Definimos otras variables que nos van a ayudar
 const vista_mostrada = ref("descripccion_inicio");
+const mini_sidebar = ref(false);
 
 // Cada vez que se presione el botón de alguno de los organos se actualizan las dos variables globales
 function setData(x) {
@@ -180,12 +196,39 @@ function setVista(x) {
 }
 
 // Creamos dos funciones para el comportamiento de la sidebar
-function abrirSidebar() {
-  document.getElementById("side-bar").style.width = "200px";
+function toggleSidebar() {
+  if (mini_sidebar.value == false) {
+    if (window.innerWidth < 850) {
+      document.getElementById("side-bar").style.width = "120px";
+    } else {
+      document.getElementById("side-bar").style.width = "150px";
+    }
+    mini_sidebar.value = true;
+  } else {
+    if (window.innerWidth < 850) {
+      document.getElementById("side-bar").style.width = "10%";
+    } else {
+      document.getElementById("side-bar").style.width = "5%";
+    }
+    mini_sidebar.value = false;
+  }
+}
+/* function abrirSidebar() {
+  if (window.innerWidth < 850) {
+    document.getElementById("side-bar").style.width = "120px";
+  } else {
+    document.getElementById("side-bar").style.width = "150px";
+  }
+  mini_sidebar.value = true;
 }
 function cerrarSidebar() {
-  document.getElementById("side-bar").style.width = "12%";
-}
+  if (window.innerWidth < 850) {
+    document.getElementById("side-bar").style.width = "10%";
+  } else {
+    document.getElementById("side-bar").style.width = "5%";
+  }
+  mini_sidebar.value = false;
+} */
 
 onMounted(() => {
   console.log("Se cargó la app");
@@ -216,7 +259,24 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 12%;
+  min-height: 12%;
+  max-height: 300px;
+  background-color: #42474c;
+  margin: auto;
+  padding-top: 3px;
+}
+.side-bar {
+  position: fixed;
+  z-index: 1;
+  top: 13%;
+  left: 0;
+  width: 5%;
+  height: 88%;
+  overflow-x: hidden;
+  /*background-color: #555a62;*/
+  background-color: pink;
+  transition: 0.5s;
+  overflow-x: hidden;
 }
 .main-content {
   /*margin-top: 7%;*/
@@ -225,63 +285,108 @@ body {
   display: flex;
 }
 .contenedor-botones-vista {
-  background-color: #555a62;
+  background-color: #42474c;
   width: 100%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: space-around;
+  justify-content: flex-start;
+  align-content: flex-start;
+  gap: 10px;
 }
-
-.boton-vista {
-  margin: 5px;
-  padding: 15px 32px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  font-size: 12px;
-  background-color: #f4f5f6;
-}
-
-.side-bar {
-  position: fixed;
-  z-index: 1;
-  top: 13%;
-  left: 0;
-  width: 12%;
-  height: 88%;
-  overflow-x: hidden;
-  background-color: #555a62;
-  transition: 0.5s;
-}
-
 .contenedor-botones-organo {
-  height: 98%;
-  padding: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: space-around;
+  background-color: #42474c;
+  min-height: 80px;
 }
-
+.div-boton-organo {
+  /*background-color: green;*/
+  text-align: left;
+  height: 80px;
+  width: 16%;
+  margin: auto;
+  padding: 0px;
+}
 .boton-oragno {
-  margin: 5px;
-  padding: 15px 32px;
+  width: 100%;
+  height: 100%;
+  /*padding: 5px 10px;*/
   border: none;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  font-size: 12px;
-  background-color: #f4f5f6;
+  font-size: 16px;
+  background-color: #42474c;
+  color: #f4f5f6;
+  font-weight: bold;
+}
+.boton-vista {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  margin: 5px;
+  width: 100%;
+  min-height: 30px;
+  /*padding: 15px 32px;*/
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #42474c;
+  color: #f4f5f6;
 }
 
 .contenedor-vista {
   /*margin: 4% 3px 3px 13%;*/
-  margin: 0% 3px 3px 13%;
+  margin: 2.2% 3px 3px 7.3%;
   padding: 0px 5px;
+  width: 100%;
+  /*background-color: plum;*/
+}
+.fondo-popup {
+  position: fixed;
+  z-index: 1;
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  background-color: black;
+}
+.popup {
+  position: fixed;
+  z-index: 2;
+  top: 10%;
+  left: 10%;
+  height: 80%;
+  width: 80%;
+  background-color: white;
+}
+@media (max-width: 850px) {
+  .nav-bar {
+    min-height: 11%;
+  }
+  .side-bar {
+    top: 12%;
+    width: 10%;
+  }
+  .div-boton-organo {
+    width: 49%;
+    height: 25px;
+  }
+  .boton-oragno {
+    font-size: 12px;
+  }
+  .contenedor-vista {
+    margin: 16% 3px 3px 10%;
+  }
 }
 </style>

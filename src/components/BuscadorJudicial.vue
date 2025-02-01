@@ -1,9 +1,4 @@
 <template>
-  <div>
-    <h1>Esta es la vista del buscador</h1>
-    <p>{{ data.length }}, {{ organo }}</p>
-  </div>
-
   <div class="contenedor-judicial">
     <!-- En esta parte se recibe el input del usuario -->
     <div>
@@ -12,11 +7,18 @@
         <label for="name">Escriba el nombre: </label>
         <input type="text" id="name" name="name" v-model="candidate_buscade" />
       </div>
-      <button @click="buscar_persona()">Buscar</button>
+      <div class="contenedor-boton-buscar">
+        <button @click="buscar_persona()" class="boton-buscar">Buscar</button>
+      </div>
     </div>
 
     <!-- En esta parte indica que la búsqueda no fue valida -->
     <div class="alert" v-if="input_invalido">Ingresa una búsqueda válida</div>
+
+    <!-- En esta parte indica que la búsqueda no tuvo resultados -->
+    <div class="sin-resultados" v-if="sin_resultados">
+      No se encontraron resultados para su búsqueda
+    </div>
 
     <!-- En esta parte se muestran los resultados de la búsqueda -->
     <div class="resultados" v-if="mostrar_resultados == 'si'">
@@ -38,7 +40,7 @@
   ></div>
   <div v-if="show_popup == true" class="popup">
     <PopUp :datos_candidate="datos_popup" />
-    <span class="close" @click="show_popup = false">&times;</span>
+    <!--     <span class="close" @click="show_popup = false">&times;</span> -->
   </div>
 </template>
 
@@ -57,27 +59,46 @@ const organo = ref(organoStore.organo_seleccionado);
 // Ahora las otras variables que controlan los datos
 const datos_resultados = ref([]);
 const candidate_buscade = ref("");
+const input_formateado = ref();
 const mostrar_resultados = ref("no");
+const sin_resultados = ref(false);
 const input_invalido = ref(false);
 
+// Las variables vinculadas al popup
 const show_popup = ref(false);
 const datos_popup = ref();
 
 function buscar_persona() {
-  console.log(typeof candidate_buscade.value);
+  // Cada que busquemos a alguien hay que vaciar la caja de resultados
+  datos_resultados.value = [];
+  mostrar_resultados.value = "no";
+  sin_resultados.value = false;
+
+  //console.log(typeof candidate_buscade.value);
+  // Primero formateamos el input del usuario para que sea todo en minuúsculas
+  input_formateado.value = candidate_buscade.value.toLowerCase();
+  // Y quitamos los acento
+  input_formateado.value = input_formateado.value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  //console.log(input_formateado.value);
+
   // Tomamos el inpunt del lado del usuario y cramos una lista
   // con las distintas palabras que buscadas separadas por un espacio
-  let lista_palabras = candidate_buscade.value.split(" ");
+  let lista_palabras = input_formateado.value.split(" ");
   lista_palabras = [...new Set(lista_palabras)];
-  console.log(lista_palabras);
-  if (candidate_buscade.value.length === 0) {
+  //console.log(lista_palabras);
+  if (typeof candidate_buscade.value != "string") {
+    // Si el input es numerico
+    input_invalido.value = true;
+  } else if (!isNaN(candidate_buscade.value) == true) {
+    // Revisamos que no sea un string que pueda ser numerico
+    input_invalido.value = true;
+  } else if (candidate_buscade.value.length === 0) {
     // Si el input es una cadena vacía
     input_invalido.value = true;
   } else if (lista_palabras[0] == "") {
     // Si el input es una cadena de espacios vacíos
-    input_invalido.value = true;
-  } else if (typeof candidate_buscade.value != "string") {
-    // Si el input es numerico
     input_invalido.value = true;
   } else {
     input_invalido.value = false;
@@ -112,13 +133,18 @@ function buscar_persona() {
       }
     }
     //console.log(datos_resultados.value);
+    if (datos_resultados.value.length == 0) {
+      sin_resultados.value = true;
+      mostrar_resultados.value = "no";
+      //console.log("sin resultados");
+    }
   }
 }
 
 function showPopUpInfo(x) {
   show_popup.value = true;
   datos_popup.value = x;
-  console.log(x);
+  //console.log(x);
 }
 
 onMounted(() => {
@@ -136,6 +162,28 @@ watch(dataStore, () => {
 </script>
 
 <style scoped>
+.contenedor-judicial {
+  /*background-color: pink;*/
+}
+.contenedor-buscador {
+  /*background-color: orange;*/
+  margin: 5px 0px;
+}
+.contenedor-boton-buscar {
+  text-align: left;
+  margin: 20px 0px;
+}
+.boton-buscar {
+  margin: auto;
+  padding: 3px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  background-color: #72cde9;
+}
 .alert {
   width: 60%;
   padding: 20px 10px;
@@ -143,24 +191,8 @@ watch(dataStore, () => {
   background-color: #eda097;
   border-radius: 10px;
 }
-
-.fondo-popup {
-  position: fixed;
-  z-index: 1;
-  top: 0%;
-  left: 0%;
-  height: 100%;
-  width: 100%;
-  opacity: 0.5;
-  background-color: black;
-}
-.popup {
-  position: fixed;
-  z-index: 2;
-  top: 5%;
-  left: 5%;
-  height: 90%;
-  width: 90%;
-  background-color: white;
+.sin-resultados {
+  font-size: 18px;
+  font-weight: bold;
 }
 </style>

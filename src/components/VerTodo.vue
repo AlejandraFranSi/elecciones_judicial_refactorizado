@@ -39,8 +39,7 @@
   ></div>
   <div v-if="show_popup == true" class="popup">
     <PopUp :datos_candidate="datos_popup" />
-
-    <span class="close" @click="show_popup = false">&times;</span>
+    <!--     <span class="close" @click="show_popup = false">&times;</span> -->
   </div>
 </template>
 
@@ -108,7 +107,7 @@ function ordenar_datos() {
 function showPopUpInfo(x) {
   show_popup.value = true;
   datos_popup.value = x;
-  console.log(x);
+  //console.log(x);
 }
 
 onMounted(() => {
@@ -158,25 +157,5 @@ watch(dataStore, () => {
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-}
-
-.fondo-popup {
-  position: fixed;
-  z-index: 1;
-  top: 0%;
-  left: 0%;
-  height: 100%;
-  width: 100%;
-  opacity: 0.5;
-  background-color: black;
-}
-.popup {
-  position: fixed;
-  z-index: 2;
-  top: 5%;
-  left: 5%;
-  height: 90%;
-  width: 90%;
-  background-color: white;
 }
 </style>
