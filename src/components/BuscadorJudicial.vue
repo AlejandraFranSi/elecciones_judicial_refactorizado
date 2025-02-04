@@ -8,7 +8,13 @@
         <input type="text" id="name" name="name" v-model="candidate_buscade" />
       </div>
       <div class="contenedor-boton-buscar">
-        <button @click="buscar_persona()" class="boton-buscar">Buscar</button>
+        <button
+          @click="buscar_persona"
+          @keypress="enter_buscar_persona"
+          class="boton-buscar"
+        >
+          Buscar
+        </button>
       </div>
     </div>
 
@@ -25,7 +31,13 @@
       <h3>Resultados</h3>
       <div v-for="(entrada, index) in datos_resultados" :key="index">
         <button @click="showPopUpInfo(entrada)">
-          {{ entrada["nombres"] + " " + entrada["apellido_paterno"] }}
+          {{
+            entrada["nombres"] +
+            " " +
+            entrada["apellido_paterno"] +
+            " " +
+            entrada["apellido_materno"]
+          }}
         </button>
       </div>
     </div>
@@ -45,7 +57,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useDataOrgano } from "../assets/stores/DataOrgano.js";
 import { useOrganoSeleccionado } from "../assets/stores/OrganoSeleccionado.js";
 import PopUp from "./PopUp.vue";
@@ -88,28 +100,27 @@ function buscar_persona() {
   let lista_palabras = input_formateado.value.split(" ");
   lista_palabras = [...new Set(lista_palabras)];
   //console.log(lista_palabras);
+
+  // Empezamos a definir qué hacer con el input
   if (typeof candidate_buscade.value != "string") {
     // Si el input es numerico
     input_invalido.value = true;
+    //console.log("entró la respuesta input != string");
   } else if (!isNaN(candidate_buscade.value) == true) {
     // Revisamos que no sea un string que pueda ser numerico
     input_invalido.value = true;
+    //console.log("entró la respuesta input es numérico");
   } else if (candidate_buscade.value.length === 0) {
     // Si el input es una cadena vacía
     input_invalido.value = true;
+    //console.log("entró la respuesta input es cadena vacía");
   } else if (lista_palabras[0] == "") {
     // Si el input es una cadena de espacios vacíos
     input_invalido.value = true;
+    //console.log("entró la respuesta input es secuencia de caracteres vacios");
   } else {
+    //console.log("entró que el input es valido");
     input_invalido.value = false;
-
-    // Hacemos que aparezca el div de resultados
-    mostrar_resultados.value = "si";
-
-    // Cada búsqueda limpiamos nuestra lista de resultados de interés
-    // También el input
-    datos_resultados.value = [];
-
     //console.log(lista_palabras);
     for (let i = 0; i < lista_palabras.length; i++) {
       // Buscamos cada palabra en las variables de nombre, apellido_paterno y apellido_materno
@@ -118,14 +129,16 @@ function buscar_persona() {
       let palabra = lista_palabras[i];
       //console.log(palabra);
       for (let m = 0; m < data.value.length; m++) {
-        //console.log(data.value[m]["nombre"]);
+        //console.log(data.value[m]);
         if (
-          data.value[m]["nombres"].includes(palabra) ||
-          data.value[m]["apellido_paterno"].includes(palabra) /* ||
-        data.value[m]["apellido_materno"].includes(palabra) */
+          data.value[m]["nombres_formateado"].includes(palabra) ||
+          data.value[m]["apellido_paterno_formateado"].includes(palabra) ||
+          data.value[m]["apellido_materno"].includes(palabra)
         ) {
+          //console.log("se encontró");
           if (datos_resultados.value.includes(data.value[m])) {
-            console.log("ya en lista");
+            //console.log("ya en lista");
+            return;
           } else {
             datos_resultados.value.push(data.value[m]);
           }
@@ -137,6 +150,9 @@ function buscar_persona() {
       sin_resultados.value = true;
       mostrar_resultados.value = "no";
       //console.log("sin resultados");
+    } else {
+      // Hacemos que aparezca el div de resultados
+      mostrar_resultados.value = "si";
     }
   }
 }
@@ -148,7 +164,20 @@ function showPopUpInfo(x) {
 }
 
 onMounted(() => {
-  console.log("Se cargó el buscador");
+  //console.log("Se cargó el buscador");
+  window.addEventListener("keydown", (event) => {
+    if (event.key == "Enter") {
+      buscar_persona();
+      //console.log("se presiono enter");
+    }
+  });
+});
+onUnmounted(() => {
+  window.removeEventListener("keydown", (event) => {
+    if (event.key == "Enter") {
+      buscar_persona();
+    }
+  });
 });
 // Montamos un watcher en la store de la data para actualizar los datos de la vista
 watch(dataStore, () => {

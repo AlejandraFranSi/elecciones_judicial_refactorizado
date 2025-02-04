@@ -7,7 +7,7 @@ export const useOrganoSeleccionado = defineStore("organoSeleccionado", {
   actions: {
     updateOrgano(nuevo_organo) {
       this.organo_seleccionado = nuevo_organo;
-      console.log(this.organo_seleccionado);
+      //console.log(this.organo_seleccionado);
     },
   },
 });

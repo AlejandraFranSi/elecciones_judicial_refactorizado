@@ -66,24 +66,15 @@ const pie = ref();
 //const valor_porcentaje = ref();
 
 function setDataGrafico() {
-  if (full_data.value.length == datos.value.length) {
-    datos_graficados.value = [
-      { name: "total", value: 0 },
-      { name: "grupo_interes", value: datos.value.length },
-    ];
-    valor_porcentaje.value = 100;
-  } else {
-    datos_graficados.value = [
-      { name: "total", value: full_data.value.length },
-      { name: "grupo_interes", value: datos.value.length },
-    ];
+  datos_graficados.value = [
+    { name: "total", value: full_data.value.length - datos.value.length },
+    { name: "grupo_interes", value: datos.value.length },
+  ];
 
-    valor_porcentaje.value = (
-      (datos_graficados.value[1]["value"] /
-        datos_graficados.value[0]["value"]) *
-      100
-    ).toFixed(2);
-  }
+  valor_porcentaje.value = (
+    (datos.value.length / full_data.value.length) *
+    100
+  ).toFixed(2);
 }
 function reescalanding() {
   dimensionandingDona();

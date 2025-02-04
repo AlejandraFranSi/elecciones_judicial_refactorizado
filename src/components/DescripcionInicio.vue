@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, /*onMounted,*/ watch } from "vue";
 import { useDataOrgano } from "../assets/stores/DataOrgano.js";
 import { useOrganoSeleccionado } from "../assets/stores/OrganoSeleccionado.js";
 
@@ -62,9 +62,9 @@ const descripciones = ref({
   },
 });
 
-onMounted(() => {
+/* onMounted(() => {
   console.log("Se cargó la descripción del inicio");
-});
+}); */
 // Montamos un watcher en la store de la data para actualizar los datos de la vista
 watch(dataStore, () => {
   data.value = dataStore.data_organo;

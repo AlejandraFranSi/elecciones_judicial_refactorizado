@@ -193,6 +193,10 @@ function setData(x) {
 // Hacemos una función para seleccionar la vista
 function setVista(x) {
   vista_mostrada.value = x;
+  if (window.innerWidth < 850) {
+    document.getElementById("side-bar").style.width = "10%";
+    mini_sidebar.value = false;
+  }
 }
 
 // Creamos dos funciones para el comportamiento de la sidebar
@@ -220,15 +224,15 @@ function toggleSidebar() {
     document.getElementById("side-bar").style.width = "150px";
   }
   mini_sidebar.value = true;
-}
-function cerrarSidebar() {
+}*/
+/* function cerrarSidebar() {
   if (window.innerWidth < 850) {
     document.getElementById("side-bar").style.width = "10%";
   } else {
     document.getElementById("side-bar").style.width = "5%";
   }
-  mini_sidebar.value = false;
-} */
+  mini_sidebar.value = false; 
+}*/
 
 onMounted(() => {
   console.log("Se cargó la app");
@@ -259,33 +263,33 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 12%;
-  max-height: 300px;
   background-color: #42474c;
+  /*background-color: orange;*/
   margin: auto;
   padding-top: 3px;
 }
 .side-bar {
   position: fixed;
   z-index: 1;
-  top: 13%;
+  top: clamp(3%, 12%, 15%);
   left: 0;
-  width: 5%;
+  min-width: 3%;
+  max-width: 4%;
   height: 88%;
   overflow-x: hidden;
-  /*background-color: #555a62;*/
-  background-color: pink;
+  background-color: #42474c;
+  /*background-color: pink;*/
   transition: 0.5s;
   overflow-x: hidden;
 }
 .main-content {
-  /*margin-top: 7%;*/
-  margin-top: 6%;
-  padding: 5px;
+  margin-top: clamp(50px, 80px, 100px);
+  margin-left: clamp(20px, 80px, 120px);
   display: flex;
+  /*background-color: cyan;*/
 }
 .contenedor-botones-vista {
-  background-color: #42474c;
+  /*background-color: #42474c;*/
   width: 100%;
   height: 100%;
   display: flex;
@@ -300,6 +304,9 @@ body {
   justify-content: space-around;
   align-content: space-around;
   background-color: #42474c;
+  min-height: 12%;
+  max-height: 300px;
+  /*background-color: blue;*/
   min-height: 80px;
 }
 .div-boton-organo {
@@ -321,6 +328,7 @@ body {
   text-decoration: none;
   font-size: 16px;
   background-color: #42474c;
+  /*background-color: red;*/
   color: #f4f5f6;
   font-weight: bold;
 }
@@ -345,11 +353,9 @@ body {
 }
 
 .contenedor-vista {
-  /*margin: 4% 3px 3px 13%;*/
-  margin: 2.2% 3px 3px 7.3%;
-  padding: 0px 5px;
   width: 100%;
   /*background-color: plum;*/
+  margin: 10px;
 }
 .fondo-popup {
   position: fixed;
@@ -358,25 +364,26 @@ body {
   left: 0%;
   height: 100%;
   width: 100%;
-  opacity: 0.5;
+  opacity: 0.8;
   background-color: black;
 }
 .popup {
   position: fixed;
   z-index: 2;
-  top: 10%;
+  top: clamp(10%, 18%, 50%);
   left: 10%;
-  height: 80%;
+  max-height: 78%;
   width: 80%;
   background-color: white;
 }
 @media (max-width: 850px) {
-  .nav-bar {
-    min-height: 11%;
-  }
   .side-bar {
-    top: 12%;
-    width: 10%;
+    min-width: 5%;
+    max-width: 10%;
+    top: clamp(5%, 9%, 12%);
+  }
+  .main-content {
+    margin-left: clamp(30px, 65px, 100px);
   }
   .div-boton-organo {
     width: 49%;
@@ -386,7 +393,11 @@ body {
     font-size: 12px;
   }
   .contenedor-vista {
-    margin: 16% 3px 3px 10%;
+    /*margin: 16% 3px 3px 10%;*/
+  }
+  .popup {
+    top: 10%;
+    height: 80%;
   }
 }
 </style>

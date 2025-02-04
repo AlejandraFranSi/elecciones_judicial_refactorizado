@@ -8,7 +8,7 @@ export const useDataOrgano = defineStore("dataOrgano", {
   actions: {
     updateOrgano(nuevo_organo) {
       this.data_organo = data[nuevo_organo];
-      console.log(this.data_organo.length);
+      //console.log(this.data_organo.length);
     },
   },
 });
