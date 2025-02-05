@@ -403,6 +403,7 @@ onMounted(() => {
   dimensionandingParalelas();
   dibujandingParalelas();
   dibujarEjes();
+  window.addEventListener("resize", reescalandingParalelas);
 });
 onUnmounted(() => {
   window.removeEventListener("resize", reescalandingParalelas);

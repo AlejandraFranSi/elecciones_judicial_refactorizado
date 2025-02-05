@@ -51,13 +51,13 @@ const svg = ref();
 const grupo_dona = ref();
 const grupo_porcentaje = ref();
 const ancho = ref(0);
-const alto_svg = ref(400);
+const alto_svg = ref();
 const alto = ref(0);
 const margenes = ref({
-  derecha: 20,
-  izquierda: 25,
-  abajo: 20,
-  arriba: 20,
+  derecha: 10,
+  izquierda: 10,
+  abajo: 10,
+  arriba: 10,
 });
 
 const radius = ref();
@@ -86,6 +86,15 @@ function dimensionandingDona() {
     contenedor_svg.value.clientWidth -
     margenes.value.derecha -
     margenes.value.izquierda;
+
+  if (window.innerWidth <= 1100) {
+    alto_svg.value = ancho.value;
+  } else if (1100 <= window.innerWidth <= 1400) {
+    alto_svg.value = 500;
+  } else {
+    alto_svg.value = 700;
+  }
+
   alto.value = alto_svg.value - margenes.value.arriba - margenes.value.abajo;
   radius.value = Math.min(ancho.value, alto.value) / 2;
 
