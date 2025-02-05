@@ -1,7 +1,7 @@
 <template>
   <!--       Este es la ventana pop-up en la que se muestra la info de la persona
       seleccionada -->
-  <div class="contenedor-externo">
+  <div class="contenedor-externo" id="prueba_popup">
     <div class="contenedor-lateral">
       <!-- Esta sección es solo el nombre -->
       <div class="contenedor-interno">
@@ -80,6 +80,7 @@
             v-for="(antecedente, index) in antecedentes_medios"
             :key="index"
             class="antecedente"
+            :id="`${index}-antecedente-medios`"
             @mouseover="abrirTooltip(antecedente)"
             @mouseleave="cerrarTooltip"
             @mousemove="ajustarPosicionTooltip"
@@ -94,6 +95,7 @@
             v-for="(antecedente, index) in antecedentes_rsociales"
             :key="index"
             class="antecedente"
+            :id="`${index}-antecedente-rs`"
             @mouseover="abrirTooltip(antecedente)"
             @mouseleave="cerrarTooltip"
             @mousemove="ajustarPosicionTooltip"
@@ -133,6 +135,8 @@ const antecedentes_rsociales = ref([]);
 const antecedente_tooltip = ref("");
 const tooltip_antecedentes = ref();
 
+const contenedor_popup = ref();
+
 function abrirTooltip(x) {
   //console.log(x);
   antecedente_tooltip.value = x;
@@ -144,16 +148,18 @@ function cerrarTooltip() {
 }
 
 function ajustarPosicionTooltip() {
-  let position = d3.pointer(event, document.body);
-  let ancho_pantalla = window.innerWidth;
   let alto_pantalla = window.innerHeight;
-  let x = position[0] - ancho_pantalla * 0.09;
-  let y = position[1] - alto_pantalla * 0.14;
-  console.log(ancho_pantalla, alto_pantalla);
-  tooltip_antecedentes.value.style("left", x + "px").style("top", y + "px");
+  let ancho_pantalla = window.innerWidth;
+  let x_cor = event.clientX - ancho_pantalla * 0.1 + 20;
+  let y_cor = event.clientY - alto_pantalla * 0.1 + 20;
+  //console.log(position);
+  tooltip_antecedentes.value
+    .style("left", x_cor + "px")
+    .style("top", y_cor + "px");
 }
 onMounted(() => {
   //console.log(datos_candidate.value);
+  contenedor_popup.value = d3.select("div.contenedor-externo");
   tooltip_antecedentes.value = d3.select("div#tooltip");
   tooltip_antecedentes.value.style("visibility", "hidden");
 
