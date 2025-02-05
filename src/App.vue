@@ -2,83 +2,65 @@
   <!-- Esta sección es la encargada de controlar los datos que se pasan al resto de los elementos -->
   <div class="nav-bar" id="nav-bar">
     <div class="contenedor-botones-organo">
-      <div class="div-boton-organo">
-        <button
-          class="boton-oragno"
-          :style="`${
-            organo == 'suprema_corte' ? 'opacity: 1' : 'opacity: 0.5'
-          }`"
-          type="button"
-          @click="setData('suprema_corte')"
-        >
-          Suprema Corte de Justicia
-        </button>
-      </div>
+      <button
+        class="boton-oragno"
+        :style="`${organo == 'suprema_corte' ? 'opacity: 1' : 'opacity: 0.5'}`"
+        type="button"
+        @click="setData('suprema_corte')"
+      >
+        Suprema Corte de Justicia
+      </button>
 
-      <div class="div-boton-organo">
-        <button
-          class="boton-oragno"
-          :style="`${
-            organo == 'sala_superior' ? 'opacity: 1' : 'opacity: 0.5'
-          }`"
-          type="button"
-          @click="setData('sala_superior')"
-        >
-          Sala Superior
-        </button>
-      </div>
+      <button
+        class="boton-oragno"
+        :style="`${organo == 'sala_superior' ? 'opacity: 1' : 'opacity: 0.5'}`"
+        type="button"
+        @click="setData('sala_superior')"
+      >
+        Sala Superior
+      </button>
 
-      <div class="div-boton-organo">
-        <button
-          class="boton-oragno"
-          :style="`${
-            organo == 'sala_regional' ? 'opacity: 1' : 'opacity: 0.5'
-          }`"
-          type="button"
-          @click="setData('sala_regional')"
-        >
-          Sala Regional
-        </button>
-      </div>
+      <button
+        class="boton-oragno"
+        :style="`${organo == 'sala_regional' ? 'opacity: 1' : 'opacity: 0.5'}`"
+        type="button"
+        @click="setData('sala_regional')"
+      >
+        Sala Regional
+      </button>
 
-      <div class="div-boton-organo">
-        <button
-          class="boton-oragno"
-          :style="`${
-            organo == 'tribunal_disciplinario' ? 'opacity: 1' : 'opacity: 0.5'
-          }`"
-          type="button"
-          @click="setData('tribunal_disciplinario')"
-        >
-          Tribunal Disciplinario
-        </button>
-      </div>
+      <button
+        class="boton-oragno"
+        :style="`${
+          organo == 'tribunal_disciplinario' ? 'opacity: 1' : 'opacity: 0.5'
+        }`"
+        type="button"
+        @click="setData('tribunal_disciplinario')"
+      >
+        Tribunal Disciplinario
+      </button>
 
-      <div class="div-boton-organo">
-        <button
-          class="boton-oragno"
-          :style="`${
-            organo == 'magistraturas_circuito' ? 'opacity: 1' : 'opacity: 0.5'
-          }`"
-          type="button"
-          @click="setData('magistraturas_circuito')"
-        >
-          Magistratura de Circuito
-        </button>
-      </div>
+      <button
+        class="boton-oragno"
+        :style="`${
+          organo == 'magistraturas_circuito' ? 'opacity: 1' : 'opacity: 0.5'
+        }`"
+        type="button"
+        @click="setData('magistraturas_circuito')"
+      >
+        Magistratura de Circuito
+      </button>
 
-      <div class="div-boton-organo">
-        <button
-          class="boton-oragno"
-          :style="`${
-            organo == 'juzgadores_distrito' ? 'opacity: 1' : 'opacity: 0.5'
-          }`"
-          type="button"
-          @click="setData('juzgadores_distrito')"
-        >
-          Juzgadores de distrito
-        </button>
-      </div>
+      <button
+        class="boton-oragno"
+        :style="`${
+          organo == 'juzgadores_distrito' ? 'opacity: 1' : 'opacity: 0.5'
+        }`"
+        type="button"
+        @click="setData('juzgadores_distrito')"
+      >
+        Juzgadores de distrito
+      </button>
     </div>
   </div>
 
@@ -202,17 +184,23 @@ function setVista(x) {
 // Creamos dos funciones para el comportamiento de la sidebar
 function toggleSidebar() {
   if (mini_sidebar.value == false) {
-    if (window.innerWidth < 850) {
-      document.getElementById("side-bar").style.width = "120px";
+    // Las dimensiones para la versión extendida
+    if (window.innerWidth < 680) {
+      document.getElementById("side-bar").style.width = "110px";
+    } else if (window.innerWidth < 1200) {
+      document.getElementById("side-bar").style.width = "110px";
     } else {
       document.getElementById("side-bar").style.width = "150px";
     }
     mini_sidebar.value = true;
   } else {
-    if (window.innerWidth < 850) {
+    // Las dimensiones para la versión chiquita
+    if (window.innerWidth < 680) {
       document.getElementById("side-bar").style.width = "10%";
-    } else {
+    } else if (window.innerWidth < 1200) {
       document.getElementById("side-bar").style.width = "5%";
+    } else {
+      document.getElementById("side-bar").style.width = "3%";
     }
     mini_sidebar.value = false;
   }
@@ -265,38 +253,36 @@ body {
   width: 100%;
   background-color: #42474c;
   /*background-color: orange;*/
-  margin: auto;
-  padding-top: 3px;
+  padding: 3px;
 }
 .side-bar {
   position: fixed;
   z-index: 1;
-  top: clamp(3%, 12%, 15%);
+  top: 93px;
   left: 0;
-  min-width: 3%;
-  max-width: 4%;
-  height: 88%;
+  width: 3%;
+  height: 91%;
+  overflow-x: hidden;
   overflow-x: hidden;
   background-color: #42474c;
   /*background-color: pink;*/
   transition: 0.5s;
-  overflow-x: hidden;
 }
 .main-content {
-  margin-top: clamp(50px, 80px, 100px);
-  margin-left: clamp(20px, 80px, 120px);
+  margin-top: 95px;
+  margin-left: 3.5%;
+  margin-right: 10px;
   display: flex;
   /*background-color: cyan;*/
 }
 .contenedor-botones-vista {
-  /*background-color: #42474c;*/
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: flex-start;
   gap: 10px;
+  margin: 5px;
+  /*background-color: lawngreen;*/
 }
 .contenedor-botones-organo {
   display: flex;
@@ -304,25 +290,13 @@ body {
   justify-content: space-around;
   align-content: space-around;
   background-color: #42474c;
-  min-height: 12%;
-  max-height: 300px;
   /*background-color: blue;*/
-  min-height: 80px;
 }
-.div-boton-organo {
-  /*background-color: green;*/
-  text-align: left;
-  height: 80px;
-  width: 16%;
-  margin: auto;
-  padding: 0px;
-}
+
 .boton-oragno {
-  width: 100%;
-  height: 100%;
-  /*padding: 5px 10px;*/
+  width: 16%;
+  height: 80px;
   border: none;
-  /*border-radius: 10px;*/
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -337,10 +311,8 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: space-around;
-  margin: 5px;
   width: 100%;
   min-height: 30px;
-  /*padding: 15px 32px;*/
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -354,8 +326,9 @@ body {
 
 .contenedor-vista {
   width: 100%;
+  margin: 0px;
+  padding: 0px;
   /*background-color: plum;*/
-  margin: 10px;
 }
 .fondo-popup {
   position: fixed;
@@ -370,34 +343,43 @@ body {
 .popup {
   position: fixed;
   z-index: 2;
-  top: clamp(10%, 18%, 50%);
+  top: 10%;
   left: 10%;
-  max-height: 78%;
+  height: 80%;
   width: 80%;
   background-color: white;
+  /*background-color: red;*/
 }
-@media (max-width: 850px) {
+
+/* Para tableta */
+@media (max-width: 1200px) {
   .side-bar {
-    min-width: 5%;
-    max-width: 10%;
-    top: clamp(5%, 9%, 12%);
+    width: 5%;
   }
   .main-content {
-    margin-left: clamp(30px, 65px, 100px);
+    margin-left: 6%;
+    margin-right: 10px;
   }
-  .div-boton-organo {
-    width: 49%;
-    height: 25px;
+  .contenedor-botones-vista {
+    margin: 5px 2px;
   }
+}
+
+/* Para celular */
+@media (max-width: 680px) {
   .boton-oragno {
-    font-size: 12px;
+    width: 50%;
+    height: 35px;
+    font-size: 15px;
   }
-  .contenedor-vista {
-    /*margin: 16% 3px 3px 10%;*/
+  .side-bar {
+    top: 115px;
+    width: 10%;
   }
-  .popup {
-    top: 10%;
-    height: 80%;
+
+  .main-content {
+    margin-left: 11%;
+    margin-right: 3px;
   }
 }
 </style>

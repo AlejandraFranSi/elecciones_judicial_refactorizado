@@ -56,22 +56,16 @@
         <div class="contenedor-iconos">
           <img
             src="../assets/img/servidor_publico.png"
-            height="60"
-            width="60"
             :style="`${
               servidor_publico == 'si' ? 'opacity: 1' : 'opacity: 0.5'
             }`"
           />
           <img
             src="../assets/img/sancion.png"
-            height="60"
-            width="60"
             :style="`${sancion_sfp == 'si' ? 'opacity: 1' : 'opacity: 0.5'}`"
           />
           <img
             src="../assets/img/patrimonio.png"
-            height="60"
-            width="60"
             :style="`${
               declaracion_patrimonial == 'si' ? 'opacity: 1' : 'opacity: 0.5'
             }`"
@@ -199,29 +193,37 @@ watch(datos_candidate, () => {
 
 <style scoped>
 .contenedor-externo {
-  height: 100%;
-  margin-top: 0px;
+  height: 90%;
   /*background-color: orange;*/
   overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
-  align-content: center;
+  align-content: flex-star;
+  margin: 50px;
 }
 .contenedor-lateral {
+  display: flex;
+  flex-wrap: wrap;
   width: 50%;
   /*background-color: blue;*/
+  gap: 10px;
 }
 .contenedor-interno {
   width: 95%;
   margin: 2%;
-  padding: 3px;
-  /*background-color: red;*/
+  /*background-color: lawngreen;*/
 }
 .contenedor-iconos {
-  width: 60%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  /*background-color: plum;*/
+  height: 100%;
+}
+
+img {
+  object-fit: contain;
+  width: 25%;
 }
 .contenedor-antecedentes {
   display: flex;
@@ -258,18 +260,18 @@ watch(datos_candidate, () => {
   text-align: center;
 }
 
-@media (max-width: 850px) {
+/* Para tableta */
+@media (max-width: 1200px) {
   .contenedor-externo {
-    align-content: flex-start;
+    margin: 10px;
+    height: 98%;
   }
-  .contenedor-gral {
-    height: auto;
-  }
+}
+
+/* Para celular */
+@media (max-width: 680px) {
   .contenedor-lateral {
     width: 100%;
-  }
-  .contenedor-interno {
-    width: auto;
   }
 }
 </style>

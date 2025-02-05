@@ -5,7 +5,7 @@
   </div> -->
   <!-- Esta sección es la que contiene los controles de los filtros -->
   <div class="contenedor-controles">
-    <h2>Selecciona de uno a tres filtros</h2>
+    <h2>Selecciona las categorías de tu interés</h2>
     <!--   Esta sección es la encargada de controlar los filtros-->
     <div class="botones-filtros">
       <div class="categoria-boton">
@@ -271,6 +271,25 @@ watch(switch_value, () => {
 
 <style scoped>
 .contenedor-controles {
+  /*background-color: orange;*/
+  margin-top: -20px;
+}
+
+.contenedor-dos-cajas {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  /*background-color: red;*/
+}
+
+.vis-seleccionada {
+  /*background-color: cyan;*/
+  width: 50%;
+}
+
+.tarjetas-candidates {
+  width: 50%;
+  /*background-color: blue;*/
 }
 
 .botones-filtros {
@@ -280,25 +299,12 @@ watch(switch_value, () => {
   align-content: center;
   padding: 5px;
   gap: 5px 0px;
+  /*background-color: lawngreen;*/
 }
 
-.contenedor-dos-cajas {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 200px;
+.categoria-boton {
+  /*background-color: plum;*/
 }
-
-.vis-seleccionada {
-  /*   background-color: pink;
- */
-  width: 50%;
-}
-
-.tarjetas-candidates {
-  width: 50%;
-}
-
 .contenedor-personas {
   background-color: #d2d6da;
   display: flex;
@@ -365,18 +371,31 @@ watch(switch_value, () => {
 .toggle-switch input:checked + .slider::before {
   transform: translateX(19px);
 }
-@media (max-width: 850px) {
-  .botones-filtros {
-    text-align: center;
-  }
-  .categoria-boton {
-    width: 100%;
+
+/* Para tableta */
+@media (max-width: 1200px) {
+}
+
+/* Para celular */
+@media (max-width: 680px) {
+  .contenedor-controles {
+    margin-top: 0px;
   }
   .vis-seleccionada {
     width: 100%;
   }
+
   .tarjetas-candidates {
     width: 100%;
+  }
+  .categoria-boton {
+    width: 48%;
+  }
+  label {
+    width: 100%;
+  }
+  select {
+    width: 98%;
   }
 }
 </style>
