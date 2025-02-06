@@ -2,19 +2,28 @@
   <div class="contenedor-judicial">
     <!-- En esta parte se recibe el input del usuario -->
     <div>
-      <h3>Ingrese el nombre o apellido de la persona a la que busca</h3>
-      <div class="contenedor-buscador">
-        <label for="name">Escriba el nombre: </label>
-        <input type="text" id="name" name="name" v-model="candidate_buscade" />
-      </div>
-      <div class="contenedor-boton-buscar">
-        <button
-          @click="buscar_persona"
-          @keypress="enter_buscar_persona"
-          class="boton-buscar"
-        >
-          Buscar
-        </button>
+      <h1>{{ organo_formateado[organo] }}</h1>
+      <p class="instrucciones">
+        Ingrese el nombre o apellido de la persona a la que buscar
+      </p>
+
+      <div class="buscador">
+        <div class="contenedor-boton-buscar">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            v-model="candidate_buscade"
+          />
+          <button
+            @click="buscar_persona"
+            @keypress="enter_buscar_persona"
+            class="boton-buscar"
+          >
+            Buscar
+            <img src="../assets/img/Copia de search_icon.png" height="15" />
+          </button>
+        </div>
       </div>
     </div>
 
@@ -29,16 +38,18 @@
     <!-- En esta parte se muestran los resultados de la búsqueda -->
     <div class="resultados" v-if="mostrar_resultados == 'si'">
       <h3>Resultados</h3>
-      <div v-for="(entrada, index) in datos_resultados" :key="index">
-        <button @click="showPopUpInfo(entrada)">
-          {{
-            entrada["nombres"] +
-            " " +
-            entrada["apellido_paterno"] +
-            " " +
-            entrada["apellido_materno"]
-          }}
-        </button>
+      <div class="contenedor-nombres-resultados">
+        <div v-for="(entrada, index) in datos_resultados" :key="index">
+          <button @click="showPopUpInfo(entrada)" class="tarjeta-persona">
+            {{
+              entrada["nombres"] +
+              " " +
+              entrada["apellido_paterno"] +
+              " " +
+              entrada["apellido_materno"]
+            }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -68,6 +79,14 @@ const data = ref(dataStore.data_organo);
 const organoStore = useOrganoSeleccionado();
 const organo = ref(organoStore.organo_seleccionado);
 
+const organo_formateado = ref({
+  suprema_corte: "Suprema Corte",
+  sala_superior: "Sala Superior",
+  sala_regional: "Sala Regional",
+  tribunal_disciplinario: "Tribunal disciplinario",
+  magistraturas_circuito: "Magistraturas de circuito",
+  juzgadores_distrito: "Juzgadores de distrito",
+});
 // Ahora las otras variables que controlan los datos
 const datos_resultados = ref([]);
 const candidate_buscade = ref("");
@@ -191,37 +210,112 @@ watch(dataStore, () => {
 </script>
 
 <style scoped>
-.contenedor-judicial {
-  /*background-color: pink;*/
+h1 {
+  font-size: 50px;
+  /*background-color: blue;*/
+  margin-bottom: 0px;
 }
-.contenedor-buscador {
+.instrucciones {
+  font-size: 18px;
+  text-align: center;
+  /*background-color: red;*/
+}
+.contenedor-judicial {
   /*background-color: orange;*/
-  margin: 5px 0px;
+  margin-top: -20px;
+  margin-left: 10%;
+  width: 80%;
+}
+.buscador {
+  background-color: #f7e7d8;
+  width: 50%;
+  margin: 10px 25%;
+  padding: 35px 15px;
+  border: none;
+  border-radius: 10px;
 }
 .contenedor-boton-buscar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 99%;
+  height: 35px;
   text-align: left;
-  margin: 20px 0px;
+  border: solid 1px #eac099;
+  border-radius: 10px;
+  /*background-color: red;*/
+  padding: 1px;
+}
+input {
+  width: 70%;
+  border: none;
+  border-radius: 10px 0px 0px 10px;
+  font-size: 18px;
 }
 .boton-buscar {
+  width: 29%;
+  height: 100%;
   margin: auto;
   padding: 3px 8px;
   border: none;
-  border-radius: 5px;
+  border-radius: 0px 10px 10px 0px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   font-size: 18px;
-  background-color: #72cde9;
+  background-color: #ca6d16;
+  color: white;
+}
+img {
+  padding-left: 5px;
 }
 .alert {
-  width: 60%;
+  width: 50%;
   padding: 20px 10px;
   margin: 10px 25%;
-  background-color: #eda097;
+  color: white;
+  background-color: #ab9c8f;
   border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }
 .sin-resultados {
-  font-size: 18px;
+  font-size: 30px;
   font-weight: bold;
+  padding: 20px;
+}
+
+.resultados {
+  /*background-color: orange;*/
+}
+h3 {
+  font-size: 30px;
+  /*background-color: lime;*/
+  margin-bottom: 0px;
+}
+.contenedor-nombres-resultados {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-content: center;
+  gap: 5px;
+  margin: 0px 0px;
+  padding: 10px;
+  /*background-color: red;*/
+}
+
+.tarjeta-persona {
+  color: #1d69a2;
+  background-color: white;
+  /*color: #dde0e3;*/
+  margin: 5px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
 }
 </style>

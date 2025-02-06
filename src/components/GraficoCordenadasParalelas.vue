@@ -160,7 +160,7 @@ function dibujandingParalelas() {
       if (full_data.value == datos.value) {
         return "#555a62";
       } else if (datos.value.includes(d)) {
-        return "#6084a8";
+        return "#DA792F";
       } else {
         return "#555a62";
       }
@@ -179,7 +179,7 @@ function dibujandingParalelas() {
       if (full_data.value == datos.value) {
         return 0.1;
       } else if (datos.value.includes(d)) {
-        return 0.3;
+        return 0.7;
       } else {
         return 0.1;
       }
@@ -207,7 +207,7 @@ function dibujandingParalelas() {
       if (full_data.value == datos.value) {
         return "#555a62";
       } else if (datos.value.includes(d)) {
-        return "#6084a8";
+        return "#DA792F";
       } else {
         return "#555a62";
       }
@@ -226,7 +226,7 @@ function dibujandingParalelas() {
       if (full_data.value == datos.value) {
         return 0.1;
       } else if (datos.value.includes(d)) {
-        return 0.4;
+        return 0.7;
       } else {
         return 0.1;
       }
@@ -254,7 +254,7 @@ function dibujandingParalelas() {
       if (full_data.value == datos.value) {
         return "#555a62";
       } else if (datos.value.includes(d)) {
-        return "#6084a8";
+        return "#DA792F";
       } else {
         return "#555a62";
       }
@@ -273,7 +273,7 @@ function dibujandingParalelas() {
       if (full_data.value == datos.value) {
         return 0.1;
       } else if (datos.value.includes(d)) {
-        return 0.4;
+        return 0.7;
       } else {
         return 0.1;
       }
@@ -298,7 +298,7 @@ function dibujarEjes() {
     .attr("width", escala_sexo.value.bandwidth() - margen_escalas.value)
     .attr("fill", (d) => {
       if (filtros.value["sexo"] == d) {
-        return "#6084a8";
+        return "#DA792F";
       } else {
         return "black";
       }
@@ -315,7 +315,7 @@ function dibujarEjes() {
     .attr("width", escala_grupo_etario.value.bandwidth() - margen_escalas.value)
     .attr("fill", (d) => {
       if (filtros.value["grupo_etario"] == d) {
-        return "#6084a8";
+        return "#DA792F";
       } else {
         return "black";
       }
@@ -338,7 +338,7 @@ function dibujarEjes() {
     )
     .attr("fill", (d) => {
       if (filtros.value["ultimo_grado"] == d) {
-        return "#6084a8";
+        return "#DA792F";
       } else {
         return "black";
       }
@@ -355,7 +355,7 @@ function dibujarEjes() {
     .attr("width", escala_experiencia.value.bandwidth() - margen_escalas.value)
     .attr("fill", (d) => {
       if (filtros.value["anios_experiencia"] == d) {
-        return "#6084a8";
+        return "#DA792F";
       } else {
         return "black";
       }

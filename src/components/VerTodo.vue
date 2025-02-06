@@ -1,31 +1,34 @@
 <template>
-  <div>
-    <h3>
-      Los nombres están ordenados alfabéticamente por el apellido paterno. Da
-      click en el nombre del o la candidata de quien desees conocer más
-      información
-    </h3>
-  </div>
-  <!--  Se genera programáticamente una caja por letra del alfabeto y, dentro de esa caga, 
+  <div class="contenedor-ver-todo">
+    <div>
+      <h1>{{ organo_formateado[organo] }}</h1>
+      <p class="instrucciones">
+        Los nombres están ordenados alfabéticamente por el apellido paterno. Da
+        clic en el nombre del o la candidata de quien desees conocer más
+        información
+      </p>
+    </div>
+    <!--  Se genera programáticamente una caja por letra del alfabeto y, dentro de esa caga, 
   un botón con el nombre las y los candidatos. Al hacer click en estos botones abre un popup</h3>-->
-  <div>
-    <div
-      class="contenedor-letra"
-      v-for="(letra, index) in abecedario"
-      :key="index"
-    >
-      <div class="header-letra">
-        {{ letra }}
-      </div>
-      <div class="contenedor-personas">
-        <button
-          class="rectangulo-persona"
-          v-for="(persona, index) in datos_ordenados[letra]"
-          :key="index"
-          @click="showPopUpInfo(persona)"
-        >
-          {{ persona.apellido_paterno + " " + persona.nombres }}
-        </button>
+    <div>
+      <div
+        class="contenedor-letra"
+        v-for="(letra, index) in abecedario"
+        :key="index"
+      >
+        <div class="header-letra">
+          {{ letra }}
+        </div>
+        <div class="contenedor-personas">
+          <button
+            class="rectangulo-persona"
+            v-for="(persona, index) in datos_ordenados[letra]"
+            :key="index"
+            @click="showPopUpInfo(persona)"
+          >
+            {{ persona.apellido_paterno + " " + persona.nombres }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -54,6 +57,15 @@ const dataStore = useDataOrgano();
 const data = ref(dataStore.data_organo);
 const organoStore = useOrganoSeleccionado();
 const organo = ref(organoStore.organo_seleccionado);
+
+const organo_formateado = ref({
+  suprema_corte: "Suprema Corte",
+  sala_superior: "Sala Superior",
+  sala_regional: "Sala Regional",
+  tribunal_disciplinario: "Tribunal disciplinario",
+  magistraturas_circuito: "Magistraturas de circuito",
+  juzgadores_distrito: "Juzgadores de distrito",
+});
 
 // Creamos las otras variables que nos van a ayudar a mostrar la info
 const show_popup = ref(false);
@@ -122,22 +134,47 @@ watch(dataStore, () => {
 </script>
 
 <style scoped>
+h1 {
+  font-size: 50px;
+  /*background-color: blue;*/
+  margin-bottom: 0px;
+}
+.instrucciones {
+  font-size: 18px;
+}
+.contenedor-ver-todo {
+  /*background-color: orange;*/
+  margin-top: -20px;
+  margin-left: 10%;
+  width: 80%;
+}
+
 .contenedor-letra {
   padding: 0px 0px;
   margin: 15px 0px;
 }
 
 .header-letra {
-  background-color: #67adcd;
-  padding: 5px 10px;
+  /*background-color: #ebe3dc;*/
+  background-color: #c8ccd0;
+  /*color: #a7cced;*/
+  /*color: #ca6d27;*/
+  color: #ca6d27;
+  padding: 2px 10px;
   margin: 0px 0px;
   text-align: left;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
+  /*border: none;*/
+  border-radius: 10px;
+  border-top: solid;
+  border-top-width: 2px;
+  border-top-color: #a7cced;
+  /*border-top-color: #ca6d27;*/
 }
 
 .contenedor-personas {
-  background-color: #e9ebed;
+  /*background-color: #e9ebed;*/
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
@@ -147,15 +184,17 @@ watch(dataStore, () => {
   padding: 5px;
 }
 .rectangulo-persona {
-  background-color: #a3cde0;
-  color: #555a62;
+  color: #1d69a2;
+  background-color: white;
   /*color: #dde0e3;*/
   margin: 5px;
-  padding: 5px 8px;
+  padding: 8px 15px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
 }
 </style>

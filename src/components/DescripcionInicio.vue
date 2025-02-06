@@ -1,10 +1,29 @@
 <template>
-  <h1>{{ descripciones[organo]["titulo"] }}</h1>
-  <div>
-    {{ descripciones[organo]["descripcion"] }}
+  <div class="contenedor-inicio">
+    <h1>{{ descripciones[organo]["titulo"] }}</h1>
+    <div class="descripcion-inicio">
+      {{ descripciones[organo]["descripcion"] }}
+    </div>
+
+    <div class="contenedor-numeralia">
+      <div class="numeralia">
+        <h3>
+          Número de cargos: <br />
+          <span class="numero-personas">
+            {{ descripciones[organo]["cargos"] }}
+          </span>
+        </h3>
+      </div>
+      <div class="numeralia">
+        <h3>
+          Número de aspirantes: <br />
+          <span class="numero-personas">
+            {{ descripciones[organo]["candidaturas"] }}
+          </span>
+        </h3>
+      </div>
+    </div>
   </div>
-  <h3>No de cargos: {{ descripciones[organo]["cargos"] }}</h3>
-  <h3>No de aspirantes: {{ descripciones[organo]["candidaturas"] }}</h3>
 </template>
 
 <script setup>
@@ -72,4 +91,41 @@ watch(dataStore, () => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+h1 {
+  font-size: 50px;
+  /*background-color: blue;*/
+  margin-bottom: 0px;
+}
+
+.contenedor-inicio {
+  /*background-color: orange;*/
+  margin-top: -20px;
+  margin-left: 10%;
+  width: 80%;
+}
+.descripcion-inicio {
+  /*background-color: cyan;*/
+  margin: 10px 0px;
+  font-size: 18px;
+}
+.contenedor-numeralia {
+  /*background-color: lime;*/
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5%;
+}
+.numeralia {
+  background-color: #f7e7d8;
+  width: 25%;
+  padding: 5px 20px;
+  border: none;
+  border-radius: 10px;
+}
+.numero-personas {
+  /*background-color: pink;*/
+  padding: 5px;
+  font-size: 30px;
+  color: #ca6d16;
+}
+</style>

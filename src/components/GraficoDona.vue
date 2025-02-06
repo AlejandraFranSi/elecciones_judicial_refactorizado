@@ -123,7 +123,7 @@ function dibujandingDona() {
       if (d.data.name == "total") {
         return "#42474C";
       } else {
-        return "#6084a8";
+        return "#DA792F";
       }
     })
     .attr("d", arc.value);

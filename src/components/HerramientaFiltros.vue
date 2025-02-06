@@ -1,111 +1,116 @@
 <template>
-  <!--   <div>
-    <h1>Esta es la vista con los filtros</h1>
-    <p>{{ data.length }}, {{ organo }}</p>
-  </div> -->
-  <!-- Esta sección es la que contiene los controles de los filtros -->
-  <div class="contenedor-controles">
-    <h2>Selecciona las categorías de tu interés</h2>
-    <!--   Esta sección es la encargada de controlar los filtros-->
-    <div class="botones-filtros">
-      <div class="categoria-boton">
-        <label for="sexo">Sexo</label>
-        <select
-          name="sexo"
-          id="sexo"
-          v-model="seleccion_sexo"
-          @change="setFiltros()"
-        >
-          <option value="Ninguno">Ninguno</option>
-          <option value="Femenino">Femenino</option>
-          <option value="Masculino">Masculino</option>
-          <option value="No binario">No binario</option>
-        </select>
-      </div>
-      <div class="categoria-boton">
-        <label for="sexo">Edad</label>
-        <select
-          name="grupo_edad"
-          id="grupo_edad"
-          v-model="seleccion_edad"
-          @change="setFiltros()"
-        >
-          <option value="Ninguno">Ninguno</option>
-          <option value="35-39">35-39</option>
-          <option value="40-44">40-44</option>
-          <option value="45-49">45-49</option>
-          <option value="50-54">50-54</option>
-          <option value="55-59">55-59</option>
-          <option value="60-64">60-64</option>
-          <option value="65-69">65-69</option>
-          <option value="70-74">70-74</option>
-          <option value="75-80">75-80</option>
-        </select>
-      </div>
-      <div class="categoria-boton">
-        <label for="anios_exp">Grado académico</label>
-        <select
-          name="estudios"
-          id="estudios"
-          v-model="seleccion_estudios"
-          @change="setFiltros()"
-        >
-          <option value="Ninguno">Ninguno</option>
-          <option value="Licenciatura">Licenciatura</option>
-          <option value="Maestria">Maestría</option>
-          <option value="Doctorado">Doctorado</option>
-          <option value="Posgrado">Posgrado</option>
-        </select>
+  <div class="contenedor-vista-filtros">
+    <h1>{{ organo_formateado[organo] }}</h1>
+    <p class="instrucciones">Selecciona las categorías de tu interés</p>
+
+    <div class="contenedor-dos-cajas">
+      <div class="lado-izquierdo">
+        <!-- Esta sección es la que contiene los controles de los filtros -->
+        <div class="contenedor-controles">
+          <div class="contenedor-toggle">
+            <p class="control-grafico">Tipo de gráfico</p>
+            <label class="toggle-switch">
+              <input type="checkbox" v-model="switch_value" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <!--   Esta sección es la encargada de controlar los filtros-->
+          <div class="botones-filtros">
+            <div class="categoria-boton">
+              <label for="sexo">Sexo</label>
+              <select
+                name="sexo"
+                id="sexo"
+                v-model="seleccion_sexo"
+                @change="setFiltros()"
+              >
+                <option value="Ninguno">Ninguno</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Masculino">Masculino</option>
+                <option value="No binario">No binario</option>
+              </select>
+            </div>
+            <div class="categoria-boton">
+              <label for="sexo">Edad</label>
+              <select
+                name="grupo_edad"
+                id="grupo_edad"
+                v-model="seleccion_edad"
+                @change="setFiltros()"
+              >
+                <option value="Ninguno">Ninguno</option>
+                <option value="35-39">35-39</option>
+                <option value="40-44">40-44</option>
+                <option value="45-49">45-49</option>
+                <option value="50-54">50-54</option>
+                <option value="55-59">55-59</option>
+                <option value="60-64">60-64</option>
+                <option value="65-69">65-69</option>
+                <option value="70-74">70-74</option>
+                <option value="75-80">75-80</option>
+              </select>
+            </div>
+            <div class="categoria-boton">
+              <label for="anios_exp">Grado académico</label>
+              <select
+                name="estudios"
+                id="estudios"
+                v-model="seleccion_estudios"
+                @change="setFiltros()"
+              >
+                <option value="Ninguno">Ninguno</option>
+                <option value="Licenciatura">Licenciatura</option>
+                <option value="Maestria">Maestría</option>
+                <option value="Doctorado">Doctorado</option>
+                <option value="Posgrado">Posgrado</option>
+              </select>
+            </div>
+
+            <div class="categoria-boton">
+              <label for="anios_exp">Años de experiencia</label>
+              <select
+                name="anios_exp"
+                id="anios_exp"
+                v-model="seleccion_anios_exp"
+                @change="setFiltros()"
+              >
+                <option value="Ninguno">Ninguno</option>
+                <option value="0-4">0-4</option>
+                <option value="5-9">5-9</option>
+                <option value="10-14">10-14</option>
+                <option value="14+">14+</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- Aquí vamos a llamar un div para insertar el gráfio--->
+        <div class="vis-seleccionada">
+          <GraficoCordenadasParalelas
+            :datos="datos_mostrados"
+            :filtros="filtros_dict"
+            v-if="switch_value == true"
+          />
+          <GraficoDona :datos="datos_mostrados" v-if="switch_value == false" />
+        </div>
       </div>
 
-      <div class="categoria-boton">
-        <label for="anios_exp">Años de experiencia</label>
-        <select
-          name="anios_exp"
-          id="anios_exp"
-          v-model="seleccion_anios_exp"
-          @change="setFiltros()"
-        >
-          <option value="Ninguno">Ninguno</option>
-          <option value="0-4">0-4</option>
-          <option value="5-9">5-9</option>
-          <option value="10-14">10-14</option>
-          <option value="14+">14+</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="contenedor-dos-cajas">
-    <!-- Aquí vamos a llamar un div para insertar el gráfio--->
-    <div class="vis-seleccionada">
-      <label class="toggle-switch">
-        <input type="checkbox" v-model="switch_value" />
-        <span class="slider"></span>
-      </label>
-      <GraficoCordenadasParalelas
-        :datos="datos_mostrados"
-        :filtros="filtros_dict"
-        v-if="switch_value == true"
-      />
-      <GraficoDona :datos="datos_mostrados" v-if="switch_value == false" />
-    </div>
-    <!-- Mientras que acá insertamos un div para que se desplieguen los nombres de los candidatos que cumplen los filtros--->
-    <div class="tarjetas-candidates">
-      <h3>Candidatas y candidatos con las características seleccionadas:</h3>
-      <!--  Esta es la caja correspondiente al caso en el que no hay resultados para la busqueda-->
-      <div class="sin-resultados" v-if="sin_resultados">
-        No se encontraron resultados para su búsqueda
-      </div>
-      <div class="contenedor-personas" v-if="!sin_resultados">
-        <button
-          class="rectangulo-persona"
-          v-for="(persona, index) in datos_mostrados"
-          :key="index"
-          @click="showPopUpInfo(persona)"
-        >
-          {{ persona.apellido_paterno + " " + persona.nombres }}
-        </button>
+      <!-- Mientras que acá insertamos un div para que se desplieguen los nombres de los candidatos que cumplen los filtros--->
+      <div class="tarjetas-candidates">
+        <h3>Candidatas y candidatos con las características seleccionadas:</h3>
+        <!--  Esta es la caja correspondiente al caso en el que no hay resultados para la busqueda-->
+        <div class="sin-resultados" v-if="sin_resultados">
+          No se encontraron resultados para su búsqueda
+        </div>
+        <div class="contenedor-personas" v-if="!sin_resultados">
+          <button
+            class="rectangulo-persona"
+            v-for="(persona, index) in datos_mostrados"
+            :key="index"
+            @click="showPopUpInfo(persona)"
+          >
+            {{ persona.apellido_paterno + " " + persona.nombres }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -137,6 +142,14 @@ const data = ref(dataStore.data_organo);
 const organoStore = useOrganoSeleccionado();
 const organo = ref(organoStore.organo_seleccionado);
 
+const organo_formateado = ref({
+  suprema_corte: "Suprema Corte",
+  sala_superior: "Sala Superior",
+  sala_regional: "Sala Regional",
+  tribunal_disciplinario: "Tribunal disciplinario",
+  magistraturas_circuito: "Magistraturas de circuito",
+  juzgadores_distrito: "Juzgadores de distrito",
+});
 // Ahora definimos las variables relacionadas con el control de los filtros
 const seleccion_sexo = ref("Ninguno");
 const seleccion_edad = ref("Ninguno");
@@ -270,9 +283,31 @@ watch(switch_value, () => {
 </script>
 
 <style scoped>
-.contenedor-controles {
+h1 {
+  font-size: 50px;
+  /*background-color: blue;*/
+  margin-bottom: 0px;
+}
+h3 {
+  font-size: 24px;
+  /*background-color: blue;*/
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+.instrucciones {
+  font-size: 18px;
+}
+.contenedor-vista-filtros {
   /*background-color: orange;*/
   margin-top: -20px;
+  margin-left: 10%;
+  width: 90%;
+}
+
+.contenedor-controles {
+  /*background-color: red;*/
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .contenedor-dos-cajas {
@@ -282,11 +317,14 @@ watch(switch_value, () => {
   /*background-color: red;*/
 }
 
-.vis-seleccionada {
+.lado-izquierdo {
   /*background-color: cyan;*/
   width: 50%;
 }
-
+.contenedor-toggle {
+  /*background-color: lime;*/
+  width: 30%;
+}
 .tarjetas-candidates {
   width: 50%;
   /*background-color: blue;*/
@@ -299,14 +337,28 @@ watch(switch_value, () => {
   align-content: center;
   padding: 5px;
   gap: 5px 0px;
-  /*background-color: lawngreen;*/
+  /*background-color: pink;*/
+  width: 65%;
 }
 
 .categoria-boton {
   /*background-color: plum;*/
+  width: 48%;
+}
+.control-grafico {
+  font-weight: bold;
+}
+label {
+  width: 100%;
+  font-weight: bold;
+}
+select {
+  width: 98%;
+  border: none;
+  font-size: 14px;
 }
 .contenedor-personas {
-  background-color: #d2d6da;
+  /*background-color: #e9ebed;*/
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
@@ -316,22 +368,25 @@ watch(switch_value, () => {
   padding: 5px;
 }
 .rectangulo-persona {
-  background-color: #6084a8;
-  color: #dde0e3;
+  color: #1d69a2;
+  background-color: white;
+  /*color: #dde0e3;*/
   margin: 5px;
-  padding: 5px 8px;
+  padding: 8px 15px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 /* Contenedor del toggle*/
 .toggle-switch {
   position: relative;
   display: inline-block;
-  width: 50px;
+  width: 90px;
   height: 25px;
   /*background-color: red;*/
   margin: auto;
@@ -348,7 +403,7 @@ watch(switch_value, () => {
   position: absolute;
   top: 2px;
   cursor: pointer;
-  background-color: #d2d6da;
+  background-color: #f7e7d8;
   border-radius: 20px;
   width: 80%;
   height: 80%;
@@ -363,13 +418,13 @@ watch(switch_value, () => {
   width: 20px;
   left: 1px;
   bottom: 0px;
-  background-color: #72cde9;
+  background-color: #da792f;
   border-radius: 50%;
   transition: transform 0.3s;
 }
 
 .toggle-switch input:checked + .slider::before {
-  transform: translateX(19px);
+  transform: translateX(50px);
 }
 
 /* Para tableta */
@@ -390,12 +445,6 @@ watch(switch_value, () => {
   }
   .categoria-boton {
     width: 48%;
-  }
-  label {
-    width: 100%;
-  }
-  select {
-    width: 98%;
   }
 }
 </style>

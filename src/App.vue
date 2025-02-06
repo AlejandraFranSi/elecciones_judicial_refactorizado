@@ -4,7 +4,7 @@
     <div class="contenedor-botones-organo">
       <button
         class="boton-oragno"
-        :style="`${organo == 'suprema_corte' ? 'opacity: 1' : 'opacity: 0.5'}`"
+        :style="`${organo == 'suprema_corte' ? 'opacity: 1' : 'opacity: 0.7'}`"
         type="button"
         @click="setData('suprema_corte')"
       >
@@ -13,7 +13,7 @@
 
       <button
         class="boton-oragno"
-        :style="`${organo == 'sala_superior' ? 'opacity: 1' : 'opacity: 0.5'}`"
+        :style="`${organo == 'sala_superior' ? 'opacity: 1' : 'opacity: 0.7'}`"
         type="button"
         @click="setData('sala_superior')"
       >
@@ -22,7 +22,7 @@
 
       <button
         class="boton-oragno"
-        :style="`${organo == 'sala_regional' ? 'opacity: 1' : 'opacity: 0.5'}`"
+        :style="`${organo == 'sala_regional' ? 'opacity: 1' : 'opacity: 0.7'}`"
         type="button"
         @click="setData('sala_regional')"
       >
@@ -32,7 +32,7 @@
       <button
         class="boton-oragno"
         :style="`${
-          organo == 'tribunal_disciplinario' ? 'opacity: 1' : 'opacity: 0.5'
+          organo == 'tribunal_disciplinario' ? 'opacity: 1' : 'opacity: 0.7'
         }`"
         type="button"
         @click="setData('tribunal_disciplinario')"
@@ -43,7 +43,7 @@
       <button
         class="boton-oragno"
         :style="`${
-          organo == 'magistraturas_circuito' ? 'opacity: 1' : 'opacity: 0.5'
+          organo == 'magistraturas_circuito' ? 'opacity: 1' : 'opacity: 0.7'
         }`"
         type="button"
         @click="setData('magistraturas_circuito')"
@@ -54,7 +54,7 @@
       <button
         class="boton-oragno"
         :style="`${
-          organo == 'juzgadores_distrito' ? 'opacity: 1' : 'opacity: 0.5'
+          organo == 'juzgadores_distrito' ? 'opacity: 1' : 'opacity: 0.7'
         }`"
         type="button"
         @click="setData('juzgadores_distrito')"
@@ -66,13 +66,12 @@
 
   <div class="main-content">
     <!-- Esta sección es la encargada de controlar la vista -->
-    <div
-      class="side-bar"
-      id="side-bar"
-      @mouseover="toggleSidebar"
-      @mouseout="toggleSidebar"
-    >
-      <div class="contenedor-botones-vista">
+    <div class="side-bar" id="side-bar">
+      <div
+        class="contenedor-botones-vista"
+        @mouseover="toggleSidebar"
+        @mouseout="toggleSidebar"
+      >
         <button
           class="boton-vista"
           :style="`${
@@ -252,6 +251,7 @@ watch(dataStore, () => {
 body {
   margin: 0px;
   padding: 0px;
+  background-color: #f5f5f5;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -267,7 +267,8 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #42474c;
+  background-color: #1d69a2;
+  /*background-color: #42474c;*/
   /*background-color: orange;*/
   padding: 3px;
 }
@@ -280,7 +281,8 @@ body {
   height: 91%;
   overflow-x: hidden;
   overflow-x: hidden;
-  background-color: #42474c;
+  /*background-color: #1d69a2;*/
+  /*background-color: #42474c;*/
   /*background-color: pink;*/
   transition: 0.5s;
 }
@@ -294,16 +296,19 @@ body {
 .contenedor-botones-vista {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin: 5px;
-  /*background-color: lawngreen;*/
+  height: 220px;
+  margin: 0px;
+  justify-content: center;
+  background-color: #a7cced;
+  align-content: space-around;
 }
 .contenedor-botones-organo {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: space-around;
-  background-color: #42474c;
+  background-color: #1d69a2;
+  /*background-color: #42474c;*/
   /*background-color: blue;*/
 }
 
@@ -315,7 +320,8 @@ body {
   text-align: center;
   text-decoration: none;
   font-size: 16px;
-  background-color: #42474c;
+  background-color: #1d69a2;
+  /*background-color: #42474c;*/
   /*background-color: red;*/
   color: #f4f5f6;
   font-weight: bold;
@@ -325,7 +331,7 @@ body {
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: space-around;
-  width: 100%;
+  /*width: 100%;*/
   min-height: 30px;
   border: none;
   border-radius: 5px;
@@ -334,14 +340,16 @@ body {
   text-align: center;
   font-size: 16px;
   font-weight: bold;
-  background-color: #42474c;
+  background-color: #a7cced;
+  /*background-color: #42474c;*/
   /*background-color: red;*/
-  color: #f4f5f6;
+  /*color: #f4f5f6;*/
+  color: #42474c;
 }
 
 .contenedor-vista {
   width: 100%;
-  margin: 0px;
+  margin: auto;
   padding: 0px;
   /*background-color: plum;*/
 }
