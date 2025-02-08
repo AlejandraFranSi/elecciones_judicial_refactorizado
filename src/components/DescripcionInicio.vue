@@ -100,7 +100,7 @@ h1 {
 
 .contenedor-inicio {
   /*background-color: orange;*/
-  margin-top: -20px;
+  margin-top: -30px;
   margin-left: 10%;
   width: 80%;
 }
@@ -127,5 +127,13 @@ h1 {
   padding: 5px;
   font-size: 30px;
   color: #ca6d16;
+}
+
+@media (max-width: 900px) {
+  .contenedor-inicio {
+    /*margin-top: -35px;*/
+    margin-left: 0px;
+    width: 100%;
+  }
 }
 </style>

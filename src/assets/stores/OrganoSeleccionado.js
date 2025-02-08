@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const useOrganoSeleccionado = defineStore("organoSeleccionado", {
   state: () => ({
-    organo_seleccionado: "suprema_corte",
+    organo_seleccionado: "caratula",
   }),
   actions: {
     updateOrgano(nuevo_organo) {

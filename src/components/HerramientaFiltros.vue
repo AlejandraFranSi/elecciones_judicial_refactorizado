@@ -299,7 +299,7 @@ h3 {
 }
 .contenedor-vista-filtros {
   /*background-color: orange;*/
-  margin-top: -20px;
+  margin-top: -30px;
   margin-left: 10%;
   width: 90%;
 }
@@ -428,7 +428,11 @@ select {
 }
 
 /* Para tableta */
-@media (max-width: 1200px) {
+@media (max-width: 900px) {
+  .contenedor-vista-filtros {
+    margin-left: 0px;
+    width: 100%;
+  }
 }
 
 /* Para celular */
@@ -439,7 +443,9 @@ select {
   .vis-seleccionada {
     width: 100%;
   }
-
+  .lado-izquierdo {
+    width: 100%;
+  }
   .tarjetas-candidates {
     width: 100%;
   }

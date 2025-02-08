@@ -174,6 +174,8 @@ function buscar_persona() {
       mostrar_resultados.value = "si";
     }
   }
+
+  candidate_buscade.value = "";
 }
 
 function showPopUpInfo(x) {
@@ -222,7 +224,7 @@ h1 {
 }
 .contenedor-judicial {
   /*background-color: orange;*/
-  margin-top: -20px;
+  margin-top: -30px;
   margin-left: 10%;
   width: 80%;
 }
@@ -317,5 +319,40 @@ h3 {
   text-decoration: none;
   font-size: 16px;
   font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .buscador {
+    width: 70%;
+    margin: 10px 8%;
+  }
+  input {
+    width: 68%;
+  }
+  .alert {
+    width: 71%;
+    margin: 10px 8%;
+  }
+}
+
+@media (max-width: 900px) {
+  .contenedor-judicial {
+    /*margin-top: -35px;*/
+    margin-left: 0px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 680px) {
+  .buscador {
+    width: 80%;
+    margin: 10px 8%;
+  }
+  input {
+    width: 68%;
+  }
+  .alert {
+    width: 81%;
+  }
 }
 </style>

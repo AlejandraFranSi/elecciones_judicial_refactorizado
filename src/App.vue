@@ -1,77 +1,97 @@
 <template>
   <!-- Esta sección es la encargada de controlar los datos que se pasan al resto de los elementos -->
   <div class="nav-bar" id="nav-bar">
-    <div class="contenedor-botones-organo">
+    <div class="contenedor-botones-navbar">
       <button
-        class="boton-oragno"
-        :style="`${organo == 'suprema_corte' ? 'opacity: 1' : 'opacity: 0.7'}`"
+        class="boton-home"
+        :style="`${organo == 'caratula' ? 'opacity: 1' : 'opacity: 0.7'}`"
         type="button"
-        @click="setData('suprema_corte')"
+        @click="setCaratula"
       >
-        Suprema Corte de Justicia
+        <img class="icono-home" src="./assets/img/Copia de home_icon.png" />
+        <div class="titulo-home">Nombre del proyecto</div>
       </button>
 
-      <button
-        class="boton-oragno"
-        :style="`${organo == 'sala_superior' ? 'opacity: 1' : 'opacity: 0.7'}`"
-        type="button"
-        @click="setData('sala_superior')"
-      >
-        Sala Superior
-      </button>
+      <div class="contenedor-botones-organo">
+        <button
+          class="boton-oragno"
+          :style="`${
+            organo == 'suprema_corte' ? 'opacity: 1' : 'opacity: 0.7'
+          }`"
+          type="button"
+          @click="setData('suprema_corte')"
+        >
+          Suprema Corte de Justicia
+        </button>
 
-      <button
-        class="boton-oragno"
-        :style="`${organo == 'sala_regional' ? 'opacity: 1' : 'opacity: 0.7'}`"
-        type="button"
-        @click="setData('sala_regional')"
-      >
-        Sala Regional
-      </button>
+        <button
+          class="boton-oragno"
+          :style="`${
+            organo == 'sala_superior' ? 'opacity: 1' : 'opacity: 0.7'
+          }`"
+          type="button"
+          @click="setData('sala_superior')"
+        >
+          Sala Superior
+        </button>
 
-      <button
-        class="boton-oragno"
-        :style="`${
-          organo == 'tribunal_disciplinario' ? 'opacity: 1' : 'opacity: 0.7'
-        }`"
-        type="button"
-        @click="setData('tribunal_disciplinario')"
-      >
-        Tribunal Disciplinario
-      </button>
+        <button
+          class="boton-oragno"
+          :style="`${
+            organo == 'sala_regional' ? 'opacity: 1' : 'opacity: 0.7'
+          }`"
+          type="button"
+          @click="setData('sala_regional')"
+        >
+          Sala Regional
+        </button>
 
-      <button
-        class="boton-oragno"
-        :style="`${
-          organo == 'magistraturas_circuito' ? 'opacity: 1' : 'opacity: 0.7'
-        }`"
-        type="button"
-        @click="setData('magistraturas_circuito')"
-      >
-        Magistratura de Circuito
-      </button>
+        <button
+          class="boton-oragno"
+          :style="`${
+            organo == 'tribunal_disciplinario' ? 'opacity: 1' : 'opacity: 0.7'
+          }`"
+          type="button"
+          @click="setData('tribunal_disciplinario')"
+        >
+          Tribunal Disciplinario
+        </button>
 
-      <button
-        class="boton-oragno"
-        :style="`${
-          organo == 'juzgadores_distrito' ? 'opacity: 1' : 'opacity: 0.7'
-        }`"
-        type="button"
-        @click="setData('juzgadores_distrito')"
-      >
-        Juzgadores de distrito
-      </button>
+        <button
+          class="boton-oragno"
+          :style="`${
+            organo == 'magistraturas_circuito' ? 'opacity: 1' : 'opacity: 0.7'
+          }`"
+          type="button"
+          @click="setData('magistraturas_circuito')"
+        >
+          Magistratura de Circuito
+        </button>
+
+        <button
+          class="boton-oragno"
+          :style="`${
+            organo == 'juzgadores_distrito' ? 'opacity: 1' : 'opacity: 0.7'
+          }`"
+          type="button"
+          @click="setData('juzgadores_distrito')"
+        >
+          Juzgadores de distrito
+        </button>
+      </div>
     </div>
   </div>
 
   <div class="main-content">
     <!-- Esta sección es la encargada de controlar la vista -->
-    <div class="side-bar" id="side-bar">
-      <div
-        class="contenedor-botones-vista"
-        @mouseover="toggleSidebar"
-        @mouseout="toggleSidebar"
-      >
+    <div
+      class="side-bar"
+      id="side-bar"
+      v-if="vista_mostrada != 'caratula'"
+      @mouseenter="toggleSidebar"
+      @mouseleave="toggleSidebar"
+    >
+      <div class="contenedor-botones-vista">
         <button
           class="boton-vista"
           :style="`${
@@ -82,10 +102,11 @@
           type="button"
           @click="setVista('descripccion_inicio')"
         >
-          <img src="../src/assets/img/home_icon.png" height="16" width="16" />
+          <img src="../src/assets/img/launch_icon.png" class="side-icon" />
           <span
             class="button-tittle"
-            :style="`${mini_sidebar ? 'display: block' : 'display: none'}`"
+            id="span-inicio"
+            :style="`${mini_sidebar ? 'display: none' : 'display: block'}`"
           >
             Inicio
           </span>
@@ -100,10 +121,10 @@
           type="button"
           @click="setVista('herramienta_filtros')"
         >
-          <img src="../src/assets/img/filter_icon.png" height="16" width="16" />
+          <img src="../src/assets/img/filter_icon.png" class="side-icon" />
           <span
             class="button-tittle"
-            :style="`${mini_sidebar ? 'display: block' : 'display: none'}`"
+            :style="`${mini_sidebar ? 'display: none' : 'display: block'}`"
           >
             Filtrar
           </span>
@@ -118,10 +139,10 @@
           type="button"
           @click="setVista('buscador_judicial')"
         >
-          <img src="../src/assets/img/search_icon.png" height="16" width="16" />
+          <img src="../src/assets/img/search_icon.png" class="side-icon" />
           <span
             class="button-tittle"
-            :style="`${mini_sidebar ? 'display: block' : 'display: none'}`"
+            :style="`${mini_sidebar ? 'display: none' : 'display: block'}`"
           >
             Buscar
           </span>
@@ -134,10 +155,13 @@
           type="button"
           @click="setVista('ver_todo')"
         >
-          <img src="../src/assets/img/all_icon.png" height="16" width="16" />
+          <img
+            src="../src/assets/img/presentation_icon.png"
+            class="side-icon"
+          />
           <span
             class="button-tittle"
-            :style="`${mini_sidebar ? 'display: block' : 'display: none'}`"
+            :style="`${mini_sidebar ? 'display: none' : 'display: block'}`"
           >
             Ver todo
           </span>
@@ -147,6 +171,7 @@
 
     <!-- Estas son las vistas posibles -->
     <div class="contenedor-vista" id="contenedro-vista">
+      <CaratulaInicial v-if="vista_mostrada == 'caratula'" />
       <DescripcionInicio v-if="vista_mostrada == 'descripccion_inicio'" />
       <HerramientaFiltros v-if="vista_mostrada == 'herramienta_filtros'" />
       <BuscadorJudicial v-if="vista_mostrada == 'buscador_judicial'" />
@@ -160,7 +185,9 @@
 import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useDataOrgano } from "./assets/stores/DataOrgano.js";
 import { useOrganoSeleccionado } from "./assets/stores/OrganoSeleccionado.js";
+import { useVistaMostrada } from "./assets/stores/VistaMostrada.js";
 // Llamamos la info de nuestros componentes
+import CaratulaInicial from "./components/CaratulaInicial.vue";
 import DescripcionInicio from "./components/DescripcionInicio.vue";
 import HerramientaFiltros from "./components/HerramientaFiltros.vue";
 import BuscadorJudicial from "./components/BuscadorJudicial.vue";
@@ -172,63 +199,69 @@ const dataStore = useDataOrgano();
 const data = ref(dataStore.data_organo);
 const organoStore = useOrganoSeleccionado();
 const organo = ref(organoStore.organo_seleccionado);
+const vistaStore = useVistaMostrada();
+const vista_mostrada = ref(vistaStore.vista_mostrada);
 
 // Definimos otras variables que nos van a ayudar
-const vista_mostrada = ref("descripccion_inicio");
-const mini_sidebar = ref(false);
+const mini_sidebar = ref(true);
+//const show_button_names = ref();
 
 // Cada vez que se presione el botón de alguno de los organos se actualizan las dos variables globales
 function setData(x) {
+  console.log("se clickeó un botón de organo", x);
   dataStore.updateOrgano(x);
   organoStore.updateOrgano(x);
+  if (vista_mostrada.value == "caratula") {
+    vistaStore.updateVista("descripccion_inicio");
+  }
 }
 
 // Hacemos una función para seleccionar la vista
 function setVista(x) {
-  vista_mostrada.value = x;
+  vistaStore.updateVista(x);
+  console.log(vista_mostrada.value);
 }
 
-// Creamos dos funciones para el comportamiento de la sidebar
+function setCaratula() {
+  dataStore.updateOrgano("caratula");
+  organoStore.updateOrgano("caratula");
+  vistaStore.updateVista("caratula");
+}
+
+// Creamos la funcion para que se despliegue el sidebar
 function toggleSidebar() {
   if (window.innerWidth > 900) {
-    if (mini_sidebar.value == false) {
-      document.getElementById("side-bar").style.width = "150px";
-      mini_sidebar.value = true;
+    if (mini_sidebar.value == true) {
+      if (900 < window.innerWidth < 1000) {
+        document.getElementById("side-bar").style.width = "130px";
+      } else {
+        document.getElementById("side-bar").style.width = "150px";
+      }
+      setTimeout(() => {
+        mini_sidebar.value = false;
+      }, 250);
     } else {
-      document.getElementById("side-bar").style.width = "3%";
-      mini_sidebar.value = false;
+      if (window.innerWidth <= 680) {
+        document.getElementById("side-bar").style.width = "10%";
+      } else {
+        if (window.innerWidth <= 1250) {
+          document.getElementById("side-bar").style.width = "5%";
+        } else {
+          document.getElementById("side-bar").style.width = "3%";
+        }
+      }
+      mini_sidebar.value = true;
     }
   } else {
     mini_sidebar.value = true;
   }
-  /*   if (mini_sidebar.value == false) {
-    // Las dimensiones para la versión extendida
-    if (window.innerWidth < 680) {
-      document.getElementById("side-bar").style.width = "110px";
-    } else if (window.innerWidth < 1200) {
-      document.getElementById("side-bar").style.width = "110px";
-    } else {
-      document.getElementById("side-bar").style.width = "150px";
-    }
-    mini_sidebar.value = true;
-  } else {
-    // Las dimensiones para la versión chiquita
-    if (window.innerWidth < 680) {
-      document.getElementById("side-bar").style.width = "10%";
-    } else if (window.innerWidth < 1200) {
-      document.getElementById("side-bar").style.width = "5%";
-    } else {
-      document.getElementById("side-bar").style.width = "3%";
-    }
-    mini_sidebar.value = false;
-  } */
 }
 
 function setSize() {
   if (window.innerWidth > 900) {
-    mini_sidebar.value = false;
-  } else {
     mini_sidebar.value = true;
+  } else {
+    mini_sidebar.value = false;
   }
 }
 onMounted(() => {
@@ -242,8 +275,12 @@ onUnmounted(() => {
 
 // Montamos un watcher en la store de la data para actualizar los datos de la vista
 watch(dataStore, () => {
+  console.log("cambiaron los datos");
   data.value = dataStore.data_organo;
   organo.value = organoStore.organo_seleccionado;
+});
+watch(vistaStore, () => {
+  vista_mostrada.value = vistaStore.vista_mostrada;
 });
 </script>
 
@@ -278,12 +315,13 @@ body {
   top: 93px;
   left: 0;
   width: 3%;
-  height: 91%;
+  height: 265px;
   overflow-x: hidden;
   overflow-x: hidden;
   /*background-color: #1d69a2;*/
   /*background-color: #42474c;*/
-  /*background-color: pink;*/
+  background-color: #a7cced;
+  padding: 0px;
   transition: 0.5s;
 }
 .main-content {
@@ -291,29 +329,67 @@ body {
   margin-left: 3.5%;
   margin-right: 10px;
   display: flex;
-  /*background-color: cyan;*/
+  /*background-color: orange;*/
 }
 .contenedor-botones-vista {
   display: flex;
   flex-wrap: wrap;
-  height: 220px;
-  margin: 0px;
+  height: 250px;
+  margin-left: -10px;
   justify-content: center;
-  background-color: #a7cced;
   align-content: space-around;
+  background-color: #a7cced;
+  /*background-color: pink;*/
+}
+.contenedor-botones-navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-around;
+  /*background-color: lime;*/
+  height: 80px;
 }
 .contenedor-botones-organo {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: space-around;
+  margin-right: 15px;
+  /*background-color: red;*/
+}
+.boton-home {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
   background-color: #1d69a2;
-  /*background-color: #42474c;*/
-  /*background-color: blue;*/
+  /*background-color: orange;*/
+  border: none;
+  cursor: pointer;
+  padding: 0px 30px;
+  color: #f4f5f6;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  height: 80px;
+  /*gap: 8px;*/
+}
+.icono-home {
+  max-height: 80px;
+  width: 23%;
+  object-fit: contain;
+}
+.titulo-home {
+  width: 73%;
+  /*background-color: cyan;*/
+  text-align: left;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 8px;
 }
 
 .boton-oragno {
-  width: 16%;
   height: 80px;
   border: none;
   cursor: pointer;
@@ -321,18 +397,19 @@ body {
   text-decoration: none;
   font-size: 16px;
   background-color: #1d69a2;
-  /*background-color: #42474c;*/
-  /*background-color: red;*/
+  /*background-color: grey;*/
   color: #f4f5f6;
   font-weight: bold;
+  padding: 0px 10px;
+  white-space: normal;
 }
 .boton-vista {
+  width: 100%;
+  min-height: 30px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-content: space-around;
-  /*width: 100%;*/
-  min-height: 30px;
+  justify-content: center;
+  align-content: center;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -343,10 +420,19 @@ body {
   background-color: #a7cced;
   /*background-color: #42474c;*/
   /*background-color: red;*/
-  /*color: #f4f5f6;*/
   color: #42474c;
+  margin-left: 10%;
 }
-
+.side-icon {
+  /*background-color: lime;*/
+  height: 30px;
+  object-fit: contain;
+}
+.button-tittle {
+  /*background-color: blue;*/
+  margin-left: 8px;
+  margin-top: 10px;
+}
 .contenedor-vista {
   width: 100%;
   margin: auto;
@@ -354,10 +440,6 @@ body {
   /*background-color: plum;*/
 }
 
-.button-tittle {
-  /*background-color: blue;*/
-  margin-left: 8px;
-}
 .fondo-popup {
   position: fixed;
   z-index: 1;
@@ -379,8 +461,32 @@ body {
   /*background-color: red;*/
 }
 
+@media (max-width: 1375px) {
+  .boton-home {
+    padding: 0px;
+    width: 14%;
+  }
+  .contenedor-botones-organo {
+    width: 85%;
+    margin: 0px;
+    height: 80px;
+  }
+  .icono-home {
+    width: 20%;
+    object-fit: contain;
+  }
+  .titulo-home {
+    width: 70%;
+    margin-top: 0px;
+    /*background-color: cyan;*/
+  }
+}
 /* Para tableta */
-@media (max-width: 1200px) {
+@media (max-width: 1250px) {
+  .boton-oragno {
+    width: 15%;
+    padding: 0px;
+  }
   .side-bar {
     width: 5%;
   }
@@ -393,6 +499,7 @@ body {
   }
   .boton-vista {
     justify-content: center;
+    margin-left: auto;
   }
 }
 /* Para tablet */
@@ -410,6 +517,21 @@ body {
 
 /* Para celular */
 @media (max-width: 680px) {
+  .contenedor-botones-navbar {
+    height: 105px;
+  }
+  .contenedor-botones-organo {
+    height: 105px;
+  }
+  .boton-home {
+    height: 105px;
+  }
+  .icono-home {
+    width: 70%;
+  }
+  .titulo-home {
+    display: none;
+  }
   .boton-oragno {
     width: 50%;
     height: 35px;
@@ -433,6 +555,9 @@ body {
     font-size: 11px;
     margin-top: 2px;
     margin-left: auto;
+  }
+  .contenedor-vista {
+    margin-top: 25px;
   }
 }
 </style>

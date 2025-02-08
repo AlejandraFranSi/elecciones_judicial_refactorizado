@@ -144,7 +144,7 @@ h1 {
 }
 .contenedor-ver-todo {
   /*background-color: orange;*/
-  margin-top: -20px;
+  margin-top: -30px;
   margin-left: 10%;
   width: 80%;
 }
@@ -196,5 +196,13 @@ h1 {
   text-decoration: none;
   font-size: 16px;
   font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .contenedor-ver-todo {
+    /*margin-top: -35px;*/
+    margin-left: 0px;
+    width: 100%;
+  }
 }
 </style>
