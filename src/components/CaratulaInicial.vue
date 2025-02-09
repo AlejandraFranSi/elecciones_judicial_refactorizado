@@ -44,7 +44,7 @@ function startTool() {
 </script>
 <style>
 h1 {
-  font-size: 50px;
+  font-size: 64px;
   /*background-color: blue;*/
   margin-bottom: 0px;
 }
@@ -58,7 +58,7 @@ h1 {
 .presentacion {
   /*background-color: cyan;
   margin: 10px 0px;*/
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .boton-explora {
@@ -68,7 +68,7 @@ h1 {
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 22px;
   background-color: #f7e7d8;
   color: #ca6d16;
   font-weight: bold;

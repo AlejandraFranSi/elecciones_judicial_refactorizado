@@ -102,7 +102,17 @@
           type="button"
           @click="setVista('descripccion_inicio')"
         >
-          <img src="../src/assets/img/launch_icon.png" class="side-icon" />
+          <img
+            src="../src/assets/img/launch_icon.png"
+            class="side-icon"
+            :style="`${!mini_sidebar ? 'display: none' : 'display: block'}`"
+          />
+          <img
+            src="../src/assets/img/launch_icon.png"
+            class="side-icon"
+            :style="`${mini_sidebar ? 'display: none' : 'display: block'}`"
+          />
+
           <span
             class="button-tittle"
             id="span-inicio"
@@ -121,7 +131,16 @@
           type="button"
           @click="setVista('herramienta_filtros')"
         >
-          <img src="../src/assets/img/filter_icon.png" class="side-icon" />
+          <img
+            src="../src/assets/img/filter_icon.png"
+            class="side-icon"
+            :style="`${!mini_sidebar ? 'display: none' : 'display: block'}`"
+          />
+          <img
+            src="../src/assets/img/filter_icon.png"
+            class="side-icon"
+            :style="`${mini_sidebar ? 'display: none' : 'display: block'}`"
+          />
           <span
             class="button-tittle"
             :style="`${mini_sidebar ? 'display: none' : 'display: block'}`"
@@ -139,7 +158,17 @@
           type="button"
           @click="setVista('buscador_judicial')"
         >
-          <img src="../src/assets/img/search_icon.png" class="side-icon" />
+          <img
+            src="../src/assets/img/search_icon.png"
+            class="side-icon"
+            :style="`${!mini_sidebar ? 'display: none' : 'display: block'}`"
+          />
+          <img
+            src="../src/assets/img/search_icon.png"
+            class="side-icon"
+            :style="`${mini_sidebar ? 'display: none' : 'display: block'}`"
+          />
+
           <span
             class="button-tittle"
             :style="`${mini_sidebar ? 'display: none' : 'display: block'}`"
@@ -158,6 +187,12 @@
           <img
             src="../src/assets/img/presentation_icon.png"
             class="side-icon"
+            :style="`${!mini_sidebar ? 'display: none' : 'display: block'}`"
+          />
+          <img
+            src="../src/assets/img/presentation_icon.png"
+            class="side-icon"
+            :style="`${mini_sidebar ? 'display: none' : 'display: block'}`"
           />
           <span
             class="button-tittle"
@@ -170,7 +205,7 @@
     </div>
 
     <!-- Estas son las vistas posibles -->
-    <div class="contenedor-vista" id="contenedro-vista">
+    <div class="contenedor-vista" id="contenedor-vista">
       <CaratulaInicial v-if="vista_mostrada == 'caratula'" />
       <DescripcionInicio v-if="vista_mostrada == 'descripccion_inicio'" />
       <HerramientaFiltros v-if="vista_mostrada == 'herramienta_filtros'" />
@@ -181,6 +216,8 @@
 </template>
 
 <script setup>
+// Llamamos el paquete de animaciones
+import "animate.css";
 // Llamamos las funciones y stores de vue
 import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useDataOrgano } from "./assets/stores/DataOrgano.js";
@@ -237,9 +274,10 @@ function toggleSidebar() {
       } else {
         document.getElementById("side-bar").style.width = "150px";
       }
-      setTimeout(() => {
+      mini_sidebar.value = false;
+      /*       setTimeout(() => {
         mini_sidebar.value = false;
-      }, 250);
+      }, 50); */
     } else {
       if (window.innerWidth <= 680) {
         document.getElementById("side-bar").style.width = "10%";
@@ -253,7 +291,7 @@ function toggleSidebar() {
       mini_sidebar.value = true;
     }
   } else {
-    mini_sidebar.value = true;
+    mini_sidebar.value = false;
   }
 }
 
@@ -276,8 +314,10 @@ onUnmounted(() => {
 // Montamos un watcher en la store de la data para actualizar los datos de la vista
 watch(dataStore, () => {
   console.log("cambiaron los datos");
+  document.getElementById("contenedor-vista").style.display = "none";
   data.value = dataStore.data_organo;
   organo.value = organoStore.organo_seleccionado;
+  document.getElementById("contenedor-vista").style.display = "block";
 });
 watch(vistaStore, () => {
   vista_mostrada.value = vistaStore.vista_mostrada;
@@ -285,13 +325,32 @@ watch(vistaStore, () => {
 </script>
 
 <style>
+@font-face {
+  font-family: fuenteInstitucional;
+  font-style: bold;
+  font-display: swap;
+  src: url("./assets/fonts/giorgio/Giorgio-Sans-Bold.woff");
+}
+@font-face {
+  font-family: fuenteInstitucional;
+  font-style: normal;
+  font-display: swap;
+  src: url("./assets/fonts/giorgio/Giorgio-Sans-Regular.woff");
+}
+
 body {
   margin: 0px;
   padding: 0px;
   background-color: #f5f5f5;
+  font-family: fuenteInstitucional;
+  letter-spacing: 1px;
+}
+button {
+  font-family: fuenteInstitucional;
+  letter-spacing: 1px;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: fuenteInstitucional;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
@@ -387,6 +446,7 @@ body {
   justify-content: center;
   margin-top: 20px;
   margin-left: 8px;
+  font-size: 20px;
 }
 
 .boton-oragno {
@@ -395,11 +455,11 @@ body {
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: bold;
   background-color: #1d69a2;
   /*background-color: grey;*/
   color: #f4f5f6;
-  font-weight: bold;
   padding: 0px 10px;
   white-space: normal;
 }
@@ -415,23 +475,29 @@ body {
   cursor: pointer;
   text-decoration: none;
   text-align: center;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   background-color: #a7cced;
   /*background-color: #42474c;*/
   /*background-color: red;*/
   color: #42474c;
   margin-left: 10%;
+  transition: 0.5s;
 }
 .side-icon {
   /*background-color: lime;*/
   height: 30px;
   object-fit: contain;
+  transition: 0.5s;
+  animation: fadeIn;
+  animation-duration: 2s;
 }
 .button-tittle {
   /*background-color: blue;*/
   margin-left: 8px;
-  margin-top: 10px;
+  /*margin-top: 10px;*/
+  animation: fadeIn;
+  animation-duration: 2s;
 }
 .contenedor-vista {
   width: 100%;
@@ -504,12 +570,15 @@ body {
 }
 /* Para tablet */
 @media (max-width: 900px) {
+  .side-bar {
+    height: 300px;
+  }
   .contenedor-botones-vista {
     gap: 15px;
   }
 
   .button-tittle {
-    font-size: 11px;
+    font-size: 15px;
     margin-top: 2px;
     margin-left: auto;
   }
@@ -535,7 +604,7 @@ body {
   .boton-oragno {
     width: 50%;
     height: 35px;
-    font-size: 15px;
+    font-size: 18px;
   }
   .side-bar {
     top: 115px;
@@ -550,11 +619,13 @@ body {
   .contenedor-botones-vista {
     gap: 15px;
   }
-
+  .boton-vista {
+    margin-left: 0px;
+  }
   .button-tittle {
-    font-size: 11px;
+    font-size: 15px;
     margin-top: 2px;
-    margin-left: auto;
+    width: 100%;
   }
   .contenedor-vista {
     margin-top: 25px;

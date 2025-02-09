@@ -93,7 +93,7 @@ watch(dataStore, () => {
 
 <style scoped>
 h1 {
-  font-size: 50px;
+  font-size: 64px;
   /*background-color: blue;*/
   margin-bottom: 0px;
 }
@@ -106,11 +106,11 @@ h1 {
 }
 .descripcion-inicio {
   /*background-color: cyan;*/
-  margin: 10px 0px;
-  font-size: 18px;
+  margin: 10px 0px 20px 0px;
+  font-size: 22px;
+  /*background-color: lime;*/
 }
 .contenedor-numeralia {
-  /*background-color: lime;*/
   display: flex;
   flex-wrap: wrap;
   gap: 5%;
@@ -121,11 +121,12 @@ h1 {
   padding: 5px 20px;
   border: none;
   border-radius: 10px;
+  font-size: 20px;
 }
 .numero-personas {
   /*background-color: pink;*/
   padding: 5px;
-  font-size: 30px;
+  font-size: 40px;
   color: #ca6d16;
 }
 

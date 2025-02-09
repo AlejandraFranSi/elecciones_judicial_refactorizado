@@ -284,18 +284,18 @@ watch(switch_value, () => {
 
 <style scoped>
 h1 {
-  font-size: 50px;
+  font-size: 64px;
   /*background-color: blue;*/
   margin-bottom: 0px;
 }
 h3 {
-  font-size: 24px;
+  font-size: 30px;
   /*background-color: blue;*/
   margin-top: 0px;
   margin-bottom: 15px;
 }
 .instrucciones {
-  font-size: 18px;
+  font-size: 22px;
 }
 .contenedor-vista-filtros {
   /*background-color: orange;*/
@@ -347,15 +347,17 @@ h3 {
 }
 .control-grafico {
   font-weight: bold;
+  font-size: 22px;
 }
 label {
   width: 100%;
+  font-size: 22px;
   font-weight: bold;
 }
 select {
   width: 98%;
   border: none;
-  font-size: 14px;
+  font-size: 20px;
 }
 .contenedor-personas {
   /*background-color: #e9ebed;*/
@@ -378,8 +380,13 @@ select {
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
+}
+.sin-resultados {
+  font-size: 22px;
+  color: #da792f;
+  font-weight: bold;
 }
 
 /* Contenedor del toggle*/

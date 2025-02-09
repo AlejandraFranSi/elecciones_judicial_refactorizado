@@ -135,12 +135,12 @@ watch(dataStore, () => {
 
 <style scoped>
 h1 {
-  font-size: 50px;
+  font-size: 64px;
   /*background-color: blue;*/
   margin-bottom: 0px;
 }
 .instrucciones {
-  font-size: 18px;
+  font-size: 22px;
 }
 .contenedor-ver-todo {
   /*background-color: orange;*/
@@ -155,22 +155,22 @@ h1 {
 }
 
 .header-letra {
-  /*background-color: #ebe3dc;*/
-  background-color: #c8ccd0;
+  background-color: #ebe3dc;
+  /*background-color: #c8ccd0;*7
   /*color: #a7cced;*/
   /*color: #ca6d27;*/
   color: #ca6d27;
-  padding: 2px 10px;
+  padding: 0px 10px 5px 10px;
   margin: 0px 0px;
   text-align: left;
-  font-size: 25px;
+  font-size: 36px;
   font-weight: bold;
   /*border: none;*/
   border-radius: 10px;
   border-top: solid;
   border-top-width: 2px;
-  border-top-color: #a7cced;
-  /*border-top-color: #ca6d27;*/
+  /*border-top-color: #a7cced;*/
+  border-top-color: #ca6d27;
 }
 
 .contenedor-personas {
@@ -194,7 +194,7 @@ h1 {
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
 }
 
