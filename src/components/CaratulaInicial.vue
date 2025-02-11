@@ -28,6 +28,8 @@
   </div>
 </template>
 <script setup>
+import "animate.css";
+
 import { useDataOrgano } from "../assets/stores/DataOrgano.js";
 import { useOrganoSeleccionado } from "../assets/stores/OrganoSeleccionado.js";
 import { useVistaMostrada } from "../assets/stores/VistaMostrada.js";
@@ -53,6 +55,8 @@ h1 {
   margin-top: -20px;
   margin-left: 10%;
   width: 80%;
+  animation: fadeIn;
+  animation-duration: 0.5s;
   /*background-color: plum;*/
 }
 .presentacion {

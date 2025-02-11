@@ -1,5 +1,8 @@
 <template>
-  <div class="contenedor-judicial">
+  <div
+    class="contenedor-judicial"
+    :class="common_switch ? 'vista-animada-a' : 'vista-animada-b'"
+  >
     <!-- En esta parte se recibe el input del usuario -->
     <div>
       <h1>{{ organo_formateado[organo] }}</h1>
@@ -31,7 +34,7 @@
     <div class="alert" v-if="input_invalido">Ingresa una búsqueda válida</div>
 
     <!-- En esta parte indica que la búsqueda no tuvo resultados -->
-    <div class="sin-resultados" v-if="sin_resultados">
+    <div class="alert" v-if="sin_resultados">
       No se encontraron resultados para su búsqueda
     </div>
 
@@ -68,6 +71,7 @@
 </template>
 
 <script setup>
+import "animate.css";
 import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useDataOrgano } from "../assets/stores/DataOrgano.js";
 import { useOrganoSeleccionado } from "../assets/stores/OrganoSeleccionado.js";
@@ -80,12 +84,12 @@ const organoStore = useOrganoSeleccionado();
 const organo = ref(organoStore.organo_seleccionado);
 
 const organo_formateado = ref({
-  suprema_corte: "Suprema Corte",
-  sala_superior: "Sala Superior",
-  sala_regional: "Sala Regional",
-  tribunal_disciplinario: "Tribunal disciplinario",
-  magistraturas_circuito: "Magistraturas de circuito",
-  juzgadores_distrito: "Juzgadores de distrito",
+  suprema_corte: "Suprema Corte de Justicia de la Nación",
+  sala_superior: "Sala Superior del TEPJ",
+  sala_regional: "Sala Regional del TEPJ",
+  tribunal_disciplinario: "Tribunal de Disciplina Judicial",
+  magistraturas_circuito: "Tribunales Colegiados de Circuito",
+  juzgadores_distrito: "Juzgados de Distrito",
 });
 // Ahora las otras variables que controlan los datos
 const datos_resultados = ref([]);
@@ -98,6 +102,9 @@ const input_invalido = ref(false);
 // Las variables vinculadas al popup
 const show_popup = ref(false);
 const datos_popup = ref();
+
+// La variable para controlar las clases de animacion
+const common_switch = ref(true);
 
 function buscar_persona() {
   // Cada que busquemos a alguien hay que vaciar la caja de resultados
@@ -208,6 +215,8 @@ watch(dataStore, () => {
   candidate_buscade.value = "";
   mostrar_resultados.value = "no";
   input_invalido.value = false;
+  sin_resultados.value = false;
+  common_switch.value = !common_switch.value;
 });
 </script>
 
@@ -271,22 +280,32 @@ input {
 img {
   padding-left: 5px;
 }
+/* .alert {
+  font-size: 30px;
+  font-weight: bold;
+  padding: 20px;
+  color: #752221;
+} */
 .alert {
   width: 50%;
   padding: 20px 10px;
   margin: 10px 25%;
+  /*color: #590925;*/
+  /*background-color: #c0acb3;*/
   color: white;
-  background-color: #ab9c8f;
+  /*background-color: #ab9c8f;*/
+  background-color: #ab9690;
   border-radius: 10px;
   font-size: 26px;
   font-weight: bold;
   text-align: center;
 }
-.sin-resultados {
+/* .sin-resultados {
   font-size: 30px;
   font-weight: bold;
   padding: 20px;
-}
+  color: #752221;
+} */
 
 .resultados {
   /*background-color: orange;*/
@@ -305,6 +324,17 @@ h3 {
   margin: 0px 0px;
   padding: 10px;
   /*background-color: red;*/
+}
+
+.vista-animada-a {
+  /*background-color: orange;*/
+  animation: fadeInDown;
+  animation-duration: 0.5s;
+}
+.vista-animada-b {
+  /*background-color: pink;*/
+  animation: slideInDown 0.5s, fadeIn 0.5s;
+  /*animation-duration: 1s;*/
 }
 
 .tarjeta-persona {
@@ -354,6 +384,15 @@ h3 {
   }
   .alert {
     width: 81%;
+  }
+}
+@media (max-width: 410px) {
+  .boton-buscar {
+    font-size: 20px;
+    width: 38%;
+  }
+  input {
+    width: 60%;
   }
 }
 </style>

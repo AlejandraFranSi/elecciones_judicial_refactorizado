@@ -2,9 +2,9 @@
   <!--       Este es la ventana pop-up en la que se muestra la info de la persona
       seleccionada -->
   <div class="contenedor-externo" id="prueba_popup">
-    <div class="contenedor-lateral">
+    <div class="contenedor-izquierda">
       <!-- Esta sección es solo el nombre -->
-      <div class="contenedor-interno">
+      <div class="contenedor-nombre">
         <h1 class="nombre-candidate">
           {{
             datos_candidate["nombres"] +
@@ -16,7 +16,7 @@
         </h1>
       </div>
       <!-- Esta sección es la info básica básica -->
-      <div class="contenedor-interno">
+      <div class="contenedor-personal">
         <p>
           <span class="highlight">Sexo:</span> {{ datos_candidate["sexo"] }}
         </p>
@@ -28,8 +28,45 @@
           <span class="highlight">Edad:</span> {{ datos_candidate["edad"] }}
         </p>
       </div>
+
+      <!-- Esta sección es la de antecedentes en medios -->
+      <div class="contenedor-noticias">
+        <p class="highlight header-antecedentes">Antecedentes en noticias</p>
+        <div class="contenedor-antecedentes">
+          <div
+            v-for="(antecedente, index) in antecedentes_medios"
+            :key="index"
+            class="antecedente"
+            :id="`${index}-antecedente-medios`"
+            @mouseover="abrirTooltip(antecedente)"
+            @mouseleave="cerrarTooltip"
+            @mousemove="ajustarPosicionTooltip"
+          ></div>
+        </div>
+      </div>
+      <!-- Esta sección es la de anecedentes en redes sociales -->
+      <div class="contenedor-sociales">
+        <p class="highlight header-antecedentes">
+          Antecedentes en redes sociales
+        </p>
+        <div class="contenedor-antecedentes">
+          <div
+            v-for="(antecedente, index) in antecedentes_rsociales"
+            :key="index"
+            class="antecedente"
+            :id="`${index}-antecedente-rs`"
+            @mouseover="abrirTooltip(antecedente)"
+            @mouseleave="cerrarTooltip"
+            @mousemove="ajustarPosicionTooltip"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contenedor-derecha">
       <!-- Esta sección es la de educación -->
-      <div class="contenedor-interno">
+
+      <div class="contenedor-educacion">
         <h3>Educación</h3>
         <ul>
           <li>Licenciatura: {{ licenciatura }}</li>
@@ -38,21 +75,27 @@
           <li>Posgrado: {{ posgrado }}</li>
         </ul>
       </div>
-    </div>
-
-    <div class="contenedor-lateral">
       <!-- Esta sección es la de trayectoria -->
-      <div class="contenedor-interno">
-        <h3>No. lugares de trabajo: {{ no_lugares_trabajo }}</h3>
+      <div class="contenedor-no-lugares">
+        <h3>No. lugares de trabajo:</h3>
+        <p class="no-lugares-trabajo">{{ no_lugares_trabajo }}</p>
+      </div>
+      <div class="contenedor-trabajo">
         <h3>Experiencia reciente</h3>
         <ul>
+          <li v-for="(cargo, index) in lista_lugares_trabajo" :key="index">
+            {{ cargo }}
+          </li>
+          <li v-for="(cargo, index) in lista_lugares_trabajo" :key="index">
+            {{ cargo }}
+          </li>
           <li v-for="(cargo, index) in lista_lugares_trabajo" :key="index">
             {{ cargo }}
           </li>
         </ul>
       </div>
       <!-- Esta sección es la de los iconos-->
-      <div class="contenedor-interno">
+      <div class="contenedor-calificaciones">
         <div class="contenedor-iconos">
           <img
             src="../assets/img/servidor_publico.png"
@@ -70,36 +113,6 @@
               declaracion_patrimonial == 'si' ? 'opacity: 1' : 'opacity: 0.5'
             }`"
           />
-        </div>
-      </div>
-      <!-- Esta sección es la de antecedentes en medios -->
-      <div class="contenedor-interno">
-        <p>Antecedentes en noticias</p>
-        <div class="contenedor-antecedentes">
-          <div
-            v-for="(antecedente, index) in antecedentes_medios"
-            :key="index"
-            class="antecedente"
-            :id="`${index}-antecedente-medios`"
-            @mouseover="abrirTooltip(antecedente)"
-            @mouseleave="cerrarTooltip"
-            @mousemove="ajustarPosicionTooltip"
-          ></div>
-        </div>
-      </div>
-      <!-- Esta sección es la de anecedentes en redes sociales -->
-      <div class="contenedor-interno">
-        <p>Antecedentes en redes sociales</p>
-        <div class="contenedor-antecedentes">
-          <div
-            v-for="(antecedente, index) in antecedentes_rsociales"
-            :key="index"
-            class="antecedente"
-            :id="`${index}-antecedente-rs`"
-            @mouseover="abrirTooltip(antecedente)"
-            @mouseleave="cerrarTooltip"
-            @mousemove="ajustarPosicionTooltip"
-          ></div>
         </div>
       </div>
     </div>
@@ -198,26 +211,122 @@ watch(datos_candidate, () => {
 </script>
 
 <style scoped>
+p {
+  /*background-color: red;*/
+  margin: 15px 0px;
+}
+h3 {
+  /*background-color: red;*/
+  margin: 10px;
+  padding-left: 5px;
+  color: #ca6d27;
+  background-color: #ebe3dc;
+  border-radius: 8px;
+  border-top: solid;
+  border-top-width: 2px;
+  border-top-color: #ca6d27;
+}
+.highlight {
+  font-weight: bold;
+}
 .contenedor-externo {
-  height: 90%;
-  /*background-color: orange;*/
+  height: 100%;
+  background-color: #f5f5f5;
   overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
   align-content: flex-star;
-  margin: 50px;
 }
-.contenedor-lateral {
+.contenedor-izquierda {
   display: flex;
   flex-wrap: wrap;
-  width: 50%;
-  /*background-color: blue;*/
+  width: 38%;
+  height: 97.1%;
+  background-color: #1d69a2;
+  color: #cee1f1;
+  padding: 10px;
+  align-content: flex-start;
+  gap: 5px;
+}
+.contenedor-derecha {
+  display: flex;
+  flex-wrap: wrap;
+  width: 57%;
+  padding: 10px;
+  /*background-color: pink;*/
+  align-content: flex-start;
   gap: 10px;
 }
-.contenedor-interno {
-  width: 95%;
-  margin: 2%;
-  /*background-color: lawngreen;*/
+
+.contenedor-nombre {
+  /*background-color: limegreen;*/
+  margin: 0px;
+}
+.nombre-candidate {
+  font-size: 84px;
+  /*background-color: red;*/
+  margin: 0px;
+  text-align: center;
+}
+.contenedor-personal {
+  /*background-color: orange;*/
+  width: 100%;
+  height: auto;
+  font-size: 22px;
+}
+
+.contenedor-noticias {
+  width: 100%;
+  font-size: 24px;
+  color: white;
+  /*background-color: red;*/
+  margin-top: 0px;
+  padding-top: 0px;
+  padding: 0px;
+}
+
+.contenedor-sociales {
+  /*background-color: cyan;*/
+  width: 100%;
+  font-size: 24px;
+  color: white;
+}
+.contenedor-antecedentes {
+  display: flex;
+  flex-wrap: wrap;
+  /*padding: 10px;*/
+  gap: 5px;
+}
+.antecedente {
+  height: 20px;
+  width: 20px;
+  background-color: white;
+}
+
+.contenedor-educacion {
+  /*background-color: orange;*/
+  width: 100%;
+  font-size: 20px;
+}
+.contenedor-no-lugares {
+  /*background-color: limegreen;*/
+  width: 100%;
+  font-size: 20px;
+}
+.no-lugares-trabajo {
+  font-weight: bold;
+  margin-left: 4%;
+  font-size: 22px;
+}
+.contenedor-trabajo {
+  /*background-color: pink;*/
+  width: 100%;
+  font-size: 20px;
+}
+.contenedor-calificaciones {
+  /*background-color: cyan;*/
+  width: 100%;
+  font-size: 20px;
 }
 .contenedor-iconos {
   display: flex;
@@ -230,20 +339,6 @@ watch(datos_candidate, () => {
 img {
   object-fit: contain;
   width: 25%;
-}
-.contenedor-antecedentes {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10px;
-  gap: 5px;
-}
-.antecedente {
-  height: 20px;
-  width: 20px;
-  background-color: black;
-}
-.highlight {
-  font-weight: bold;
 }
 
 .tooltip {
@@ -259,25 +354,79 @@ img {
   text-align: left;
 }
 
-.nombre-candidate {
-  font-size: 60px;
-  /*background-color: red;*/
-  margin: auto;
-  text-align: center;
-}
-
 /* Para tableta */
-@media (max-width: 1200px) {
-  .contenedor-externo {
-    margin: 10px;
-    height: 98%;
-  }
-}
+/* @media (max-width: 900px) {
+  .contenedor-izquierda {
+    display: flex;
+    flex-wrap: wrap;
+    width: 38%;
+    height: 97.5%;
 
-/* Para celular */
-@media (max-width: 680px) {
-  .contenedor-lateral {
+  }
+  .contenedor-derecha {
+    display: flex;
+    flex-wrap: wrap;
+    width: 57%;
+    padding: 10px;
+    background-color: pink;
+    align-content: flex-start;
+    gap: 10px;
+  }
+
+} */
+/* Para movil*/
+@media (max-width: 900px) {
+  h3 {
+    border-top-width: 1.5px;
+  }
+  .contenedor-izquierda {
     width: 100%;
+    height: auto;
+    background-color: #f5f5f5;
+    padding: 0px;
+  }
+  .contenedor-derecha {
+    width: 98%;
+  }
+
+  .contenedor-nombre {
+    background-color: #1d69a2;
+    margin: 0px;
+    width: 100%;
+    padding: 10px;
+  }
+  .contenedor-personal {
+    width: 100%;
+    color: black;
+    padding: 10px;
+  }
+
+  .contenedor-noticias {
+    color: #1d69a2;
+    padding: 10px;
+  }
+
+  .contenedor-sociales {
+    /*background-color: cyan;*/
+    color: #1d69a2;
+    width: 100%;
+    font-size: 24px;
+    padding: 10px;
+  }
+
+  .antecedente {
+    height: 25px;
+    width: 25px;
+    background-color: #a7cced;
+  }
+  .header-antecedentes {
+    background-color: #e2ebf3;
+    color: #1d69a2;
+    border-radius: 8px;
+    border-top: solid;
+    border-top-width: 1.5px;
+    border-top-color: #1d69a2;
+    padding-left: 5px;
   }
 }
 </style>

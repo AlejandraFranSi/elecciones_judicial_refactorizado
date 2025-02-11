@@ -21,7 +21,7 @@
           type="button"
           @click="setData('suprema_corte')"
         >
-          Suprema Corte de Justicia
+          Suprema Corte de Justicia de la Nación
         </button>
 
         <button
@@ -32,7 +32,7 @@
           type="button"
           @click="setData('sala_superior')"
         >
-          Sala Superior
+          Sala Superior del TEPJF
         </button>
 
         <button
@@ -43,7 +43,7 @@
           type="button"
           @click="setData('sala_regional')"
         >
-          Sala Regional
+          Sala Regional del TEPJF
         </button>
 
         <button
@@ -54,7 +54,7 @@
           type="button"
           @click="setData('tribunal_disciplinario')"
         >
-          Tribunal Disciplinario
+          Tribunal de Disciplina Judicial
         </button>
 
         <button
@@ -65,7 +65,7 @@
           type="button"
           @click="setData('magistraturas_circuito')"
         >
-          Magistratura de Circuito
+          Tribunales Colegiados de Circuito
         </button>
 
         <button
@@ -76,7 +76,7 @@
           type="button"
           @click="setData('juzgadores_distrito')"
         >
-          Juzgadores de distrito
+          Juzgados de Distrito
         </button>
       </div>
     </div>
@@ -206,7 +206,7 @@
 
     <!-- Estas son las vistas posibles -->
     <div class="contenedor-vista" id="contenedor-vista">
-      <CaratulaInicial v-if="vista_mostrada == 'caratula'" />
+      <CaratulaInicial id="caratula" v-if="vista_mostrada == 'caratula'" />
       <DescripcionInicio v-if="vista_mostrada == 'descripccion_inicio'" />
       <HerramientaFiltros v-if="vista_mostrada == 'herramienta_filtros'" />
       <BuscadorJudicial v-if="vista_mostrada == 'buscador_judicial'" />
@@ -245,7 +245,6 @@ const mini_sidebar = ref(true);
 
 // Cada vez que se presione el botón de alguno de los organos se actualizan las dos variables globales
 function setData(x) {
-  console.log("se clickeó un botón de organo", x);
   dataStore.updateOrgano(x);
   organoStore.updateOrgano(x);
   if (vista_mostrada.value == "caratula") {
@@ -256,7 +255,7 @@ function setData(x) {
 // Hacemos una función para seleccionar la vista
 function setVista(x) {
   vistaStore.updateVista(x);
-  console.log(vista_mostrada.value);
+  //console.log(vista_mostrada.value);
 }
 
 function setCaratula() {
@@ -303,7 +302,7 @@ function setSize() {
   }
 }
 onMounted(() => {
-  console.log("Se cargó la app");
+  //console.log("Se cargó la app");
   setSize();
   window.addEventListener("resize", setSize);
 });
@@ -313,11 +312,10 @@ onUnmounted(() => {
 
 // Montamos un watcher en la store de la data para actualizar los datos de la vista
 watch(dataStore, () => {
-  console.log("cambiaron los datos");
-  document.getElementById("contenedor-vista").style.display = "none";
+  // Cambiamos los datos
+  //console.log("cambiaron los datos");
   data.value = dataStore.data_organo;
   organo.value = organoStore.organo_seleccionado;
-  document.getElementById("contenedor-vista").style.display = "block";
 });
 watch(vistaStore, () => {
   vista_mostrada.value = vistaStore.vista_mostrada;
@@ -388,7 +386,7 @@ button {
   margin-left: 3.5%;
   margin-right: 10px;
   display: flex;
-  /*background-color: orange;*/
+  /*background-color: plum;*/
 }
 .contenedor-botones-vista {
   display: flex;
@@ -501,9 +499,9 @@ button {
 }
 .contenedor-vista {
   width: 100%;
-  margin: auto;
+  margin: 0px;
   padding: 0px;
-  /*background-color: plum;*/
+  /*background-color: orange;*/
 }
 
 .fondo-popup {
@@ -519,15 +517,15 @@ button {
 .popup {
   position: fixed;
   z-index: 2;
-  top: 10%;
-  left: 10%;
-  height: 80%;
-  width: 80%;
+  top: 3%;
+  left: 20%;
+  height: 94%;
+  width: 60%;
   background-color: white;
   /*background-color: red;*/
 }
 
-@media (max-width: 1375px) {
+@media (max-width: 1450px) {
   .boton-home {
     padding: 0px;
     width: 14%;
@@ -547,8 +545,9 @@ button {
     /*background-color: cyan;*/
   }
 }
+
 /* Para tableta */
-@media (max-width: 1250px) {
+@media (max-width: 1350px) {
   .boton-oragno {
     width: 15%;
     padding: 0px;
@@ -582,10 +581,21 @@ button {
     margin-top: 2px;
     margin-left: auto;
   }
+
+  .popup {
+    position: fixed;
+    z-index: 2;
+    top: 7%;
+    left: 3%;
+    height: 86%;
+    width: 94%;
+    background-color: white;
+    /*background-color: red;*/
+  }
 }
 
 /* Para celular */
-@media (max-width: 680px) {
+@media (max-width: 711px) {
   .contenedor-botones-navbar {
     height: 105px;
   }
@@ -614,6 +624,7 @@ button {
   .main-content {
     margin-left: 11%;
     margin-right: 3px;
+    margin-top: 115px;
   }
 
   .contenedor-botones-vista {
@@ -628,7 +639,32 @@ button {
     width: 100%;
   }
   .contenedor-vista {
-    margin-top: 25px;
+    margin-left: 3px;
+  }
+}
+
+/* Para celular */
+@media (max-width: 515px) {
+  .contenedor-botones-navbar {
+    height: 135px;
+  }
+  .contenedor-botones-organo {
+    height: 135px;
+  }
+  .boton-home {
+    height: 135px;
+  }
+  .boton-oragno {
+    width: 50%;
+    height: 45px;
+    font-size: 18px;
+  }
+  .side-bar {
+    top: 145px;
+    width: 10%;
+  }
+  .main-content {
+    margin-top: 145px;
   }
 }
 </style>

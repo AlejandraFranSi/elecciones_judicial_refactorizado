@@ -1,5 +1,8 @@
 <template>
-  <div class="contenedor-vista-filtros">
+  <div
+    class="contenedor-vista-filtros"
+    :class="common_switch ? 'vista-animada-a' : 'vista-animada-b'"
+  >
     <h1>{{ organo_formateado[organo] }}</h1>
     <p class="instrucciones">Selecciona las categorías de tu interés</p>
 
@@ -129,6 +132,7 @@
 </template>
 
 <script setup>
+import "animate.css";
 import { ref, /*onMounted,*/ watch } from "vue";
 import { useDataOrgano } from "../assets/stores/DataOrgano.js";
 import { useOrganoSeleccionado } from "../assets/stores/OrganoSeleccionado.js";
@@ -143,12 +147,12 @@ const organoStore = useOrganoSeleccionado();
 const organo = ref(organoStore.organo_seleccionado);
 
 const organo_formateado = ref({
-  suprema_corte: "Suprema Corte",
-  sala_superior: "Sala Superior",
-  sala_regional: "Sala Regional",
-  tribunal_disciplinario: "Tribunal disciplinario",
-  magistraturas_circuito: "Magistraturas de circuito",
-  juzgadores_distrito: "Juzgadores de distrito",
+  suprema_corte: "Suprema Corte de Justicia de la Nación",
+  sala_superior: "Sala Superior del TEPJ",
+  sala_regional: "Sala Regional del TEPJ",
+  tribunal_disciplinario: "Tribunal de Disciplina Judicial",
+  magistraturas_circuito: "Tribunales Colegiados de Circuito",
+  juzgadores_distrito: "Juzgados de Distrito",
 });
 // Ahora definimos las variables relacionadas con el control de los filtros
 const seleccion_sexo = ref("Ninguno");
@@ -170,6 +174,9 @@ const datos_popup = ref();
 
 // Los datos vinculados al toggle de la gráfica
 const switch_value = ref(false);
+
+// El switch para intercambiar las clases
+const common_switch = ref(true);
 
 function setFiltros() {
   // Reseteamos nuestra variable de sin resultados
@@ -276,10 +283,11 @@ watch(dataStore, () => {
   data.value = dataStore.data_organo;
   organo.value = organoStore.organo_seleccionado;
   setFiltros();
+  common_switch.value = !common_switch.value;
 });
-watch(switch_value, () => {
+/* watch(switch_value, () => {
   console.log(switch_value.value);
-});
+}); */
 </script>
 
 <style scoped>
@@ -357,7 +365,7 @@ label {
 select {
   width: 98%;
   border: none;
-  font-size: 20px;
+  font-size: 18px;
 }
 .contenedor-personas {
   /*background-color: #e9ebed;*/
@@ -383,12 +391,23 @@ select {
   font-size: 20px;
   font-weight: 600;
 }
-.sin-resultados {
+/* .sin-resultados {
   font-size: 22px;
   color: #da792f;
   font-weight: bold;
+} */
+.sin-resultados {
+  width: 90%;
+  padding: 20px 10px;
+  /*margin: 10px 5%;*/
+  color: white;
+  /*background-color: #ab9090;*/
+  background-color: #ab9690;
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
 }
-
 /* Contenedor del toggle*/
 .toggle-switch {
   position: relative;
@@ -432,6 +451,17 @@ select {
 
 .toggle-switch input:checked + .slider::before {
   transform: translateX(50px);
+}
+
+/* Las clases animadas */
+.vista-animada-a {
+  /*background-color: orange;*/
+  animation: fadeInLeft;
+  animation-duration: 0.5s;
+}
+.vista-animada-b {
+  /*background-color: pink;*/
+  animation: slideInLeft 0.5s, fadeIn 0.5s;
 }
 
 /* Para tableta */

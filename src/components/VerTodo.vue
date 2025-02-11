@@ -1,5 +1,8 @@
 <template>
-  <div class="contenedor-ver-todo">
+  <div
+    class="contenedor-ver-todo"
+    :class="common_switch ? 'vista-animada-a' : 'vista-animada-b'"
+  >
     <div>
       <h1>{{ organo_formateado[organo] }}</h1>
       <p class="instrucciones">
@@ -47,6 +50,7 @@
 </template>
 
 <script setup>
+import "animate.css";
 import { ref, onMounted, watch } from "vue";
 import { useDataOrgano } from "../assets/stores/DataOrgano.js";
 import { useOrganoSeleccionado } from "../assets/stores/OrganoSeleccionado.js";
@@ -59,12 +63,12 @@ const organoStore = useOrganoSeleccionado();
 const organo = ref(organoStore.organo_seleccionado);
 
 const organo_formateado = ref({
-  suprema_corte: "Suprema Corte",
-  sala_superior: "Sala Superior",
-  sala_regional: "Sala Regional",
-  tribunal_disciplinario: "Tribunal disciplinario",
-  magistraturas_circuito: "Magistraturas de circuito",
-  juzgadores_distrito: "Juzgadores de distrito",
+  suprema_corte: "Suprema Corte de Justicia de la Nación",
+  sala_superior: "Sala Superior del TEPJ",
+  sala_regional: "Sala Regional del TEPJ",
+  tribunal_disciplinario: "Tribunal de Disciplina Judicial",
+  magistraturas_circuito: "Tribunales Colegiados de Circuito",
+  juzgadores_distrito: "Juzgados de Distrito",
 });
 
 // Creamos las otras variables que nos van a ayudar a mostrar la info
@@ -100,6 +104,9 @@ const abecedario = ref([
   "Z",
 ]);
 
+// El switch para intercambiar las clases
+const common_switch = ref(true);
+
 function ordenar_datos() {
   // Creamos una diccionario de datos donde las claves son las letras del abecedario y
   // los valores son los candidatos cuyo apellido paterno inician con esa letra
@@ -130,6 +137,7 @@ watch(dataStore, () => {
   data.value = dataStore.data_organo;
   organo.value = organoStore.organo_seleccionado;
   ordenar_datos();
+  common_switch.value = !common_switch.value;
 });
 </script>
 
@@ -197,7 +205,16 @@ h1 {
   font-size: 20px;
   font-weight: 600;
 }
-
+/* Las clases animadas */
+.vista-animada-a {
+  /*background-color: orange;*/
+  animation: fadeInLeft;
+  animation-duration: 0.5s;
+}
+.vista-animada-b {
+  /*background-color: pink;*/
+  animation: slideInLeft 0.5s, fadeIn 0.5s;
+}
 @media (max-width: 900px) {
   .contenedor-ver-todo {
     /*margin-top: -35px;*/
