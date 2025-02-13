@@ -9,7 +9,7 @@
         @click="setCaratula"
       >
         <img class="icono-home" src="./assets/img/Copia de home_icon.png" />
-        <div class="titulo-home">Nombre del proyecto</div>
+        <!--         <div class="titulo-home">Nombre del proyecto</div> -->
       </button>
 
       <div class="contenedor-botones-organo">
@@ -278,10 +278,16 @@ function toggleSidebar() {
         mini_sidebar.value = false;
       }, 50); */
     } else {
-      if (window.innerWidth <= 680) {
-        document.getElementById("side-bar").style.width = "10%";
+      if (window.innerWidth <= 460) {
+        document.getElementById("side-bar").style.width = "12%";
       } else {
-        if (window.innerWidth <= 1250) {
+        if (window.innerWidth <= 560) {
+          document.getElementById("side-bar").style.width = "11%";
+        } else if (window.innerWidth <= 705) {
+          document.getElementById("side-bar").style.width = "9%";
+        } else if (window.innerWidth <= 985) {
+          document.getElementById("side-bar").style.width = "7%";
+        } else if (window.innerWidth <= 1205) {
           document.getElementById("side-bar").style.width = "5%";
         } else {
           document.getElementById("side-bar").style.width = "3%";
@@ -324,35 +330,36 @@ watch(vistaStore, () => {
 
 <style>
 @font-face {
-  font-family: fuenteInstitucional;
+  font-family: WorkSans;
+  font-display: swap;
+  src: url("./assets/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: Giorgio;
   font-style: bold;
   font-display: swap;
   src: url("./assets/fonts/giorgio/Giorgio-Sans-Bold.woff");
 }
 @font-face {
-  font-family: fuenteInstitucional;
+  font-family: Giorgio;
   font-style: normal;
   font-display: swap;
   src: url("./assets/fonts/giorgio/Giorgio-Sans-Regular.woff");
 }
-
-body {
-  margin: 0px;
-  padding: 0px;
-  background-color: #f5f5f5;
-  font-family: fuenteInstitucional;
-  letter-spacing: 1px;
-}
-button {
-  font-family: fuenteInstitucional;
-  letter-spacing: 1px;
-}
 #app {
-  font-family: fuenteInstitucional;
+  font-family: WorkSans;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
   color: black;
+}
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #f5f5f5;
+  font-family: Giorgio;
+  letter-spacing: 1px;
 }
 
 .nav-bar {
@@ -361,15 +368,84 @@ button {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #1d69a2;
+  background-color: #0068a2;
   /*background-color: #42474c;*/
   /*background-color: orange;*/
   padding: 3px;
 }
+
+.contenedor-botones-navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-around;
+  /*background-color: lime;*/
+  width: 99.5%;
+  height: 80px;
+}
+.contenedor-botones-organo {
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-content: space-around;
+  gap: 0px 10px;
+  /*background-color: red;*/
+}
+
+.boton-oragno {
+  height: 80px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #0068a2;
+  /*background-color: grey;*/
+  color: #f4f5f6;
+  padding: 0px 5px;
+  white-space: normal;
+  opacity: 0.4;
+}
+.boton-home {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  background-color: #0068a2;
+  /*background-color: plum;*/
+  border: none;
+  cursor: pointer;
+  padding: 0px 30px;
+  color: #f4f5f6;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  height: 80px;
+  width: 5%;
+  /*gap: 8px;*/
+}
+.icono-home {
+  max-height: 60px;
+  object-fit: contain;
+  /*background-color: orange;*/
+}
+/* .titulo-home {
+  width: 73%;
+  background-color: cyan;
+  text-align: left;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 8px;
+  font-size: 20px;
+} */
+
 .side-bar {
   position: fixed;
   z-index: 1;
-  top: 93px;
+  top: 120px;
   left: 0;
   width: 3%;
   height: 265px;
@@ -378,16 +454,10 @@ button {
   /*background-color: #1d69a2;*/
   /*background-color: #42474c;*/
   background-color: #a7cced;
-  padding: 0px;
+  /*background-color: lime;*/
   transition: 0.5s;
 }
-.main-content {
-  margin-top: 95px;
-  margin-left: 3.5%;
-  margin-right: 10px;
-  display: flex;
-  /*background-color: plum;*/
-}
+
 .contenedor-botones-vista {
   display: flex;
   flex-wrap: wrap;
@@ -398,69 +468,7 @@ button {
   background-color: #a7cced;
   /*background-color: pink;*/
 }
-.contenedor-botones-navbar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: space-around;
-  /*background-color: lime;*/
-  height: 80px;
-}
-.contenedor-botones-organo {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: space-around;
-  margin-right: 15px;
-  /*background-color: red;*/
-}
-.boton-home {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  background-color: #1d69a2;
-  /*background-color: orange;*/
-  border: none;
-  cursor: pointer;
-  padding: 0px 30px;
-  color: #f4f5f6;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  height: 80px;
-  /*gap: 8px;*/
-}
-.icono-home {
-  max-height: 80px;
-  width: 23%;
-  object-fit: contain;
-}
-.titulo-home {
-  width: 73%;
-  /*background-color: cyan;*/
-  text-align: left;
-  justify-content: center;
-  margin-top: 20px;
-  margin-left: 8px;
-  font-size: 20px;
-}
 
-.boton-oragno {
-  height: 80px;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: bold;
-  background-color: #1d69a2;
-  /*background-color: grey;*/
-  color: #f4f5f6;
-  padding: 0px 10px;
-  white-space: normal;
-}
 .boton-vista {
   width: 100%;
   min-height: 30px;
@@ -473,7 +481,7 @@ button {
   cursor: pointer;
   text-decoration: none;
   text-align: center;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
   background-color: #a7cced;
   /*background-color: #42474c;*/
@@ -483,7 +491,7 @@ button {
   transition: 0.5s;
 }
 .side-icon {
-  /*background-color: lime;*/
+  /*background-color: cyan;*/
   height: 30px;
   object-fit: contain;
   transition: 0.5s;
@@ -493,10 +501,19 @@ button {
 .button-tittle {
   /*background-color: blue;*/
   margin-left: 8px;
-  /*margin-top: 10px;*/
+  margin-top: 8px;
   animation: fadeIn;
   animation-duration: 2s;
 }
+
+.main-content {
+  margin-top: 95px;
+  margin-left: 3%;
+  margin-right: 10px;
+  display: flex;
+  /*background-color: plum;*/
+}
+
 .contenedor-vista {
   width: 100%;
   margin: 0px;
@@ -511,160 +528,156 @@ button {
   left: 0%;
   height: 100%;
   width: 100%;
-  opacity: 0.8;
+  opacity: 0.9;
   background-color: black;
 }
 .popup {
   position: fixed;
   z-index: 2;
-  top: 3%;
-  left: 20%;
-  height: 94%;
-  width: 60%;
-  background-color: white;
+  top: 5%;
+  left: 15%;
+  height: 90%;
+  width: 70%;
+  border: none;
+  border: none;
+  border-radius: 15px;
+  /*background-color: white;*/
   /*background-color: red;*/
 }
-
-@media (max-width: 1450px) {
-  .boton-home {
-    padding: 0px;
-    width: 14%;
-  }
+@media (max-width: 1530px) {
   .contenedor-botones-organo {
-    width: 85%;
-    margin: 0px;
+    gap: 0px 5px;
+  }
+  .boton-oragno {
     height: 80px;
-  }
-  .icono-home {
-    width: 20%;
-    object-fit: contain;
-  }
-  .titulo-home {
-    width: 70%;
-    margin-top: 0px;
-    /*background-color: cyan;*/
+    width: 16.2%;
   }
 }
 
-/* Para tableta */
-@media (max-width: 1350px) {
+/* Aqui se hace un cambio en el ancho del sidebar */
+@media (max-width: 1205px) {
+  .contenedor-botones-organo {
+    width: 91%;
+  }
   .boton-oragno {
-    width: 15%;
-    padding: 0px;
+    height: 80px;
+  }
+  .boton-home {
+    width: 50px;
+    margin-left: 10px;
   }
   .side-bar {
     width: 5%;
   }
   .main-content {
-    margin-left: 6%;
-    margin-right: 10px;
-  }
-  .contenedor-botones-vista {
-    margin: 5px 2px;
-  }
-  .boton-vista {
-    justify-content: center;
-    margin-left: auto;
+    margin-left: 5%;
   }
 }
-/* Para tablet */
-@media (max-width: 900px) {
+
+/* Aquí se hace otro cambio de tamaño del sidebar */
+@media (max-width: 985px) {
+  .contenedor-botones-organo {
+    width: 90%;
+  }
+  .boton-oragno {
+    width: 15%;
+  }
   .side-bar {
-    height: 300px;
+    width: 7%;
   }
-  .contenedor-botones-vista {
-    gap: 15px;
-  }
-
-  .button-tittle {
-    font-size: 15px;
-    margin-top: 2px;
-    margin-left: auto;
-  }
-
-  .popup {
-    position: fixed;
-    z-index: 2;
-    top: 7%;
-    left: 3%;
-    height: 86%;
-    width: 94%;
-    background-color: white;
-    /*background-color: red;*/
+  .main-content {
+    margin-left: 7%;
   }
 }
 
-/* Para celular */
-@media (max-width: 711px) {
+@media (max-width: 900px) {
+  .button-tittle {
+    margin-top: 0px;
+  }
+  .main-content {
+    margin-left: 8%;
+  }
+}
+
+/* Aquí es donde entran los botones en dos columnas */
+/* También entra otro cambio de tamaño en el sidebar */
+@media (max-width: 705px) {
   .contenedor-botones-navbar {
-    height: 105px;
+    justify-content: center;
+    height: 150px;
   }
   .contenedor-botones-organo {
-    height: 105px;
+    height: 150px;
+    gap: 0px;
+    justify-content: center;
+  }
+  .boton-oragno {
+    height: 50px;
+    width: 49.5%;
   }
   .boton-home {
-    height: 105px;
+    width: 50px;
+    height: 150px;
+    padding: 5px;
   }
   .icono-home {
-    width: 70%;
-  }
-  .titulo-home {
-    display: none;
-  }
-  .boton-oragno {
-    width: 50%;
-    height: 35px;
-    font-size: 18px;
+    height: 50px;
   }
   .side-bar {
-    top: 115px;
-    width: 10%;
+    top: 170px;
+    width: 9%;
   }
-
   .main-content {
-    margin-left: 11%;
-    margin-right: 3px;
-    margin-top: 115px;
-  }
-
-  .contenedor-botones-vista {
-    gap: 15px;
-  }
-  .boton-vista {
-    margin-left: 0px;
-  }
-  .button-tittle {
-    font-size: 15px;
-    margin-top: 2px;
-    width: 100%;
-  }
-  .contenedor-vista {
-    margin-left: 3px;
+    margin-top: 150px;
+    margin-left: 10%;
   }
 }
 
-/* Para celular */
-@media (max-width: 515px) {
-  .contenedor-botones-navbar {
-    height: 135px;
-  }
+@media (max-width: 610px) {
   .contenedor-botones-organo {
-    height: 135px;
+    width: 89%;
+    gap: 0px;
+    justify-content: center;
+    opacity: 0.5;
   }
   .boton-home {
-    height: 135px;
+    width: 45px;
+    padding: 0px;
   }
-  .boton-oragno {
-    width: 50%;
+  .icono-home {
     height: 45px;
-    font-size: 18px;
   }
+}
+
+/* Aqui entra otro cambio de tamaño  en el sidebar*/
+@media (max-width: 560px) {
+  .boton-home {
+    width: 40px;
+    padding: 0px;
+    margin-left: 0px;
+  }
+  .icono-home {
+    height: 40px;
+  }
+
   .side-bar {
-    top: 145px;
-    width: 10%;
+    width: 11%;
   }
   .main-content {
-    margin-top: 145px;
+    margin-left: 12%;
+  }
+}
+
+/* Aquí entra otro cambio en el tamaño del sidebar */
+@media (max-width: 460px) {
+  .contenedor-botones-organo {
+    width: 87.4%;
+  }
+  .side-bar {
+    width: 12%;
+  }
+  .main-content {
+    margin-left: 13%;
   }
 }
 </style>

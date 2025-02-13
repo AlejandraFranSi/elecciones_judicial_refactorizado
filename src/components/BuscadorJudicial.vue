@@ -223,11 +223,10 @@ watch(dataStore, () => {
 <style scoped>
 h1 {
   font-size: 64px;
-  /*background-color: blue;*/
   margin-bottom: 0px;
 }
 .instrucciones {
-  font-size: 22px;
+  font-size: 17px;
   text-align: center;
   /*background-color: red;*/
 }
@@ -251,7 +250,7 @@ h1 {
   width: 99%;
   height: 35px;
   text-align: left;
-  border: solid 1px #eac099;
+  border: solid 1px #e8c6a9;
   border-radius: 10px;
   /*background-color: red;*/
   padding: 1px;
@@ -260,7 +259,7 @@ input {
   width: 70%;
   border: none;
   border-radius: 10px 0px 0px 10px;
-  font-size: 20px;
+  font-size: 16px;
 }
 .boton-buscar {
   width: 29%;
@@ -272,9 +271,9 @@ input {
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  font-size: 22px;
+  font-size: 16px;
   font-weight: bold;
-  background-color: #ca6d16;
+  background-color: #e07010;
   color: white;
 }
 img {
@@ -296,7 +295,7 @@ img {
   /*background-color: #ab9c8f;*/
   background-color: #ab9690;
   border-radius: 10px;
-  font-size: 26px;
+  font-size: 18px;
   font-weight: bold;
   text-align: center;
 }
@@ -358,7 +357,7 @@ h3 {
     margin: 10px 8%;
   }
   input {
-    width: 68%;
+    width: 69%;
   }
   .alert {
     width: 71%;
@@ -386,13 +385,16 @@ h3 {
     width: 81%;
   }
 }
-@media (max-width: 410px) {
+@media (max-width: 480px) {
   .boton-buscar {
     font-size: 20px;
-    width: 38%;
+    width: 46%;
+  }
+  img {
+    padding-left: 2px;
   }
   input {
-    width: 60%;
+    width: 52%;
   }
 }
 </style>

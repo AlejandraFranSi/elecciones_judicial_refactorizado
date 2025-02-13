@@ -22,9 +22,7 @@
       elit eleifend mollis. Phasellus faucibus purus at lectus tincidunt, eget
       molestie sem blandit.
     </p>
-    <button class="boton-explora" @click="startTool">
-      Explora la herramienta
-    </button>
+    <button class="boton-explora" @click="startTool">Continuar</button>
   </div>
 </template>
 <script setup>
@@ -46,6 +44,7 @@ function startTool() {
 </script>
 <style>
 h1 {
+  font-family: Giorgio;
   font-size: 64px;
   /*background-color: blue;*/
   margin-bottom: 0px;
@@ -62,19 +61,22 @@ h1 {
 .presentacion {
   /*background-color: cyan;
   margin: 10px 0px;*/
-  font-size: 22px;
+  font-size: 17px;
 }
 
 .boton-explora {
-  height: 80px;
-  border: solid 1px #ca6d16;
+  height: 65px;
+  /*border: solid 1px #ca6d16;*/
+  border: none;
   border-radius: 10px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   font-size: 22px;
-  background-color: #f7e7d8;
-  color: #ca6d16;
+  /*background-color: #f7e7d8;*/
+  /*color: #ca6d16;*/
+  background-color: #e07010;
+  color: white;
   font-weight: bold;
   padding: 0px 35px;
 }

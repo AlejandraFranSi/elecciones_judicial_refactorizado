@@ -117,16 +117,19 @@ h1 {
 .descripcion-inicio {
   /*background-color: cyan;*/
   margin: 10px 0px 20px 0px;
-  font-size: 22px;
-  /*background-color: lime;*/
+  font-size: 17px;
 }
 .contenedor-numeralia {
   display: flex;
   flex-wrap: wrap;
   gap: 5%;
+  margin-top: 40px;
 }
 .numeralia {
-  background-color: #f7e7d8;
+  font-family: Giorgio;
+  /*background-color: #f7e7d8;*/
+  background-color: #e07010;
+  color: white;
   width: 25%;
   padding: 5px 20px;
   border: none;
@@ -137,7 +140,7 @@ h1 {
   /*background-color: pink;*/
   padding: 5px;
   font-size: 40px;
-  color: #ca6d16;
+  /*color: #ca6d16;*/
 }
 .vista-animada-a {
   /*background-color: orange;*/
@@ -156,10 +159,10 @@ h1 {
     width: 100%;
   }
 }
-@media (max-width: 680px) {
+@media (max-width: 550px) {
   .numeralia {
-    width: 70%;
-    margin: 0px 0px 15px 0px;
+    width: 60%;
+    margin: 0px 0px 30px 0px;
   }
 }
 </style>
